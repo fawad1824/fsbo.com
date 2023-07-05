@@ -23,7 +23,7 @@
         }
     </style>
     <!-- Favicon -->
-    <link href="{{ asset('website/img/favicon.ico') }}" rel="icon">
+    <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,15 +39,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="{{ asset('website/lib/animate/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('website/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('user/lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('user/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ asset('website/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('user/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="{{ asset('website/css/style.css') }}" rel="stylesheet">
-    @livewireStyles
+    <link href="{{ asset('user/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -62,13 +61,12 @@
         <!-- Spinner End -->
 
 
-
         <!-- Navbar Start -->
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-                <a href="Home Page.html" class="navbar-brand d-flex align-items-center text-center">
+                <a href="{{ url('/') }}" class="navbar-brand d-flex align-items-center text-center">
                     <div class="icon p-2 me-2">
-                        <img class="img-fluid" src="{{ asset('website/img/icon-deal.png') }}" alt="Icon"
+                        <img class="img-fluid" src="{{ asset('user/img/icon-deal.png') }}" alt="Icon"
                             style="width: 30px; height: 30px;">
                     </div>
                     <h1 class="m-0 text-primary">FSBO </h1>
@@ -79,27 +77,40 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="Home Page.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="{{ url('/') }}"
+                            class="nav-item nav-link {{ Route::is('home.index') ? 'active' : '' }}">Home</a>
+                        <a href="{{ url('about') }}"
+                            class="nav-item nav-link {{ Route::is('about') ? 'active' : '' }}">About</a>
                         <a href="property-agent.html" class="nav-item nav-link">Dealers</a>
                         <a href="property-list.html" class="nav-item nav-link">Properties</a>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
-                        <a href="login.html" class="nav-item nav-link">Login</a>
-                        <a href="register.html" class="nav-item nav-link">Register</a>
-                        <a href="Home Page.html" class="nav-item nav-link">Logout</a>
+                        @guest
+                            @if (Route::has('login'))
+                                <a href="{{ url('/login') }}" class="nav-item nav-link">Login</a>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <a href="{{ url('/register') }}" class="nav-item nav-link">Register</a>
+                            @endif
+                        @else
+                            <a href="{{ url('/home') }}" class="nav-item nav-link">Dashboard</a>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                          document.getElementById('logout-form').submit();"
+                                class="nav-item nav-link">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        @endguest
                     </div>
-                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
+                    <a href="#" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
                 </div>
             </nav>
         </div>
         <!-- Navbar End -->
 
 
-
-
-
         @yield('content')
-
 
 
         <!-- Footer Start -->
@@ -167,14 +178,13 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js "></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js "></script>
-    <script src="{{ asset('website/lib/wow/wow.min.js') }} "></script>
-    <script src="{{ asset('website/lib/easing/easing.min.js ') }}"></script>
-    <script src="{{ asset('website/lib/waypoints/waypoints.min.js') }} "></script>
-    <script src="{{ asset('website/lib/owlcarousel/owl.carousel.min.js') }} "></script>
+    <script src="{{ asset('user/lib/wow/wow.min.js') }} "></script>
+    <script src="{{ asset('user/lib/easing/easing.min.js') }} "></script>
+    <script src="{{ asset('user/lib/waypoints/waypoints.min.js') }} "></script>
+    <script src="{{ asset('user/lib/owlcarousel/owl.carousel.min.js') }} "></script>
 
     <!-- Template Javascript -->
-    <script src="{{ asset('website/js/main.js') }} "></script>
-    @livewireScripts
+    <script src="{{ asset('user/js/main.js') }}"></script>
 </body>
 
 </html>
