@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 // Admin Routes
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/propertyRent', [HomeController::class, 'propertyRent'])->name('propertyRent');
+Route::get('/users', [HomeController::class, 'users'])->name('users');
 
 
 // User Route

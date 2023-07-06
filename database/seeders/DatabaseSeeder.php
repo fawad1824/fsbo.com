@@ -34,11 +34,39 @@ class DatabaseSeeder extends Seeder
             PropertyType::create($type);
         }
 
+        // Admin
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
             'role_id' => '1',
+            'address' => 'admin',
+            'phone' => '1234566',
+        ]);
+        // Agent
+        User::factory()->create([
+            'name' => 'Agent',
+            'email' => 'agent@gmail.com',
+            'password' => bcrypt('agent'),
+            'role_id' => '2',
+            'address' => 'admin',
+            'phone' => '1234566',
+        ]);
+        // dealer
+        User::factory()->create([
+            'name' => 'Dealer',
+            'email' => 'dealer@gmail.com',
+            'password' => bcrypt('dealer'),
+            'role_id' => '3',
+            'address' => 'dealer',
+            'phone' => '1234566',
+        ]);
+        // User
+        User::factory()->create([
+            'name' => 'user',
+            'email' => 'user@gmail.com',
+            'password' => bcrypt('user'),
+            'role_id' => '4',
             'address' => 'admin',
             'phone' => '1234566',
         ]);
