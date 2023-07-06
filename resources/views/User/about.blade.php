@@ -1,12 +1,6 @@
 @extends('layouts.website')
 
 @section('content')
-<style>
-    .img-fluid {
-    max-width: 100%;
-    height: 270px;
-}
-</style>
     <!-- Header Start -->
     <div class="container-fluid header bg-white p-0">
         <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
