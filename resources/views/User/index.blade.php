@@ -1,7 +1,7 @@
 @extends('layouts.website')
 
 @section('content')
-   
+
     <style>
         svg.w-5.h-5 {
             height: 32px;
@@ -725,10 +725,10 @@
                                 <p>Real Estate Agents usually specialize in either commercial or residential real estate.
                                 </p>
                             </div>
-                            <a href=" " class="btn btn-primary py-3 px-4 me-2 "><i
+                            <a href="#" class="btn btn-primary py-3 px-4 me-2 "><i
                                     class="fa fa-phone-alt me-2 "></i>Make A Call</a>
-                            <a href=" " class="btn btn-dark py-3 px-4 "><i class="fa fa-calendar-alt me-2 "></i>Get
-                                Appoinment</a>
+                            <a href="#" class="btn btn-dark py-3 px-4 "><i class="fa fa-calendar-alt me-2 "></i>Get
+                                Booking</a>
                         </div>
                     </div>
                 </div>
