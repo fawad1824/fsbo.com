@@ -1,7 +1,6 @@
 @extends('layouts.website')
 
 @section('content')
-
     <style>
         svg.w-5.h-5 {
             height: 32px;
@@ -186,520 +185,54 @@
             <div class="tab-content ">
                 <div id="tab-1 " class="tab-pane fade show p-0 active ">
                     <div class="row g-4 ">
-                        <div class="col-lg-4 col-md-6 wow fadeInUp " data-wow-delay="0.1s ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid " src="{{ asset('user/img/lahore 1.jpg') }} "
-                                            alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Sell</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Appartment</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">PKR 70,345 Lakh</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden Appartment For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, Sialkot, Pakistan
-                                    </p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
+                        @foreach ($property as $item)
+                            @php
+                                $Ptype = DB::table('propertieskinds')
+                                    ->where('id', $item->ptype)
+                                    ->first();
+                                $Ptype2 = DB::table('propertieskinds')
+                                    ->where('id', $item->ptype2)
+                                    ->first();
+                                $money = $item->price;
+                            @endphp
+                            <div class="col-lg-4 col-md-6 wow fadeInUp " data-wow-delay="0.1s ">
+                                <a href="{{ url('propertyView/' . $item->id) }}">
+                                    <div class="property-item rounded overflow-hidden ">
+                                        <div class="position-relative overflow-hidden ">
+                                            <a href="{{ url('propertyView/' . $item->id) }} "><img
+                                                    style="width: -webkit-fill-available;" class="img-fluid "
+                                                    src="{{ '/images/' . $item->image }} " alt=" "></a>
+                                            <div
+                                                class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
+                                                For {{ $item->type }}</div>
+                                            <div
+                                                class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
+                                                {{ $Ptype->name . ' ' . $Ptype2->name }}</div>
+                                        </div>
+                                        <div class="p-4 pb-0 ">
+                                            <h5 class="text-primary mb-3 ">PKR {{ $money }}</h5>
+                                            <a class="d-block h5 mb-2 "
+                                                href="{{ url('propertyView/' . $item->id) }} ">{{ $item->name }}</a>
+                                            <p><i
+                                                    class="fa fa-map-marker-alt text-primary me-2 "></i>{{ $item->areaname }}
+                                            </p>
+                                        </div>
+                                        <div class="d-flex border-top ">
+                                            <small class="flex-fill text-center border-end py-2 "><i
+                                                    class="fa fa-ruler-combined text-primary me-2 "></i>{{ $item->size . ' ' . ' (' . $item->sizeM . ' )' }}</small>
+                                            <small class="flex-fill text-center border-end py-2 "><i
+                                                    class="fa fa-bed text-primary me-2 "></i>{{ $item->bedrooms }}
+                                                Bed</small>
+                                            <small class="flex-fill text-center py-2 "><i
+                                                    class="fa fa-bath text-primary me-2 "></i>{{ $item->bathrooms }}
+                                                Bath</small>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 wow fadeInUp " data-wow-delay="0.3s ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid " src="{{ asset('user/img/lahore 2.jpg') }} "
-                                            alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Rent</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Villa</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">PKR 75,000</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden Villa For Rent</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, Sialkot, Pakistan
-                                    </p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 wow fadeInUp " data-wow-delay="0.5s ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid " src="{{ asset('user/img/lahore 3.jpg') }} "
-                                            alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Sell</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Home</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">PKR 65,345 Lakh</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden Home For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, Sialkot, Pakistan
-                                    </p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 wow fadeInUp " data-wow-delay="0.1s ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid " src="{{ asset('user/img/shop.jpg') }} "
-                                            alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Rent</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Shop</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">PKR 70,000</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden Shop For Rent</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, Sialkot, Pakistan
-                                    </p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Rooms</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 wow fadeInUp " data-wow-delay="0.3s ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid "
-                                            src="{{ asset('user/img/building.jpg') }} " alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Sell</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Building</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">PKR 700,000 Lakh</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden Building For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, Sialkot, Pakistan
-                                    </p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Floors</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>4 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 wow fadeInUp " data-wow-delay="0.5s ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid " src="{{ asset('user/img/office.jpg') }} "
-                                            alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Rent</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Office</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">PKR 80,000</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden Office For Rent</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, Sialkot, Pakistan
-                                    </p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Rooms</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 text-center wow fadeInUp " data-wow-delay="0.1s ">
-                            <a class="btn btn-primary py-3 px-5 " href=" ">Browse More Property</a>
-                        </div>
-                    </div>
-                </div>
-                <div id="tab-2 " class="tab-pane fade show p-0 ">
-                    <div class="row g-4 ">
-                        <div class="col-lg-4 col-md-6 ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid "
-                                            src="{{ asset('user/img/lahore 7.jpg') }} " alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Sell</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Appartment</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">PKR 85,345 Lakh</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, Sialkot, Pakistan
-                                    </p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Rooms</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid "
-                                            src="{{ asset('user/img/lahore 8.jpg') }} " alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Rent</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Villa</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">PKR 78,000</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, Sialkot, Pakistan
-                                    </p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid "
-                                            src="{{ asset('user/img/lahore 9.jpg') }} " alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Sell</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Office</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">PKR 69,345 Lakh</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, Sialkot, Pakistan
-                                    </p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Rooms</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid "
-                                            src="{{ asset('user/img/lahore 10.jpg') }} " alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Rent</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Building</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">PKR 82,000 Lakh</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden House For Rent</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, Sialkot, Pakistan
-                                    </p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid "
-                                            src="{{ asset('user/img/sialkot 11.jpg') }} " alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Sell</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Home</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">PKR 72,345 Lakh</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, Sialkot, Pakistan
-                                    </p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid "
-                                            src="{{ asset('user/img/sialkot 12.jpg') }} " alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Rent</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Shop</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">PKR 78,000</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, Sialkot, Pakistan
-                                    </p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 text-center ">
-                            <a class="btn btn-primary py-3 px-5 " href=" ">Browse More Property</a>
-                        </div>
-                    </div>
-                </div>
-                <div id="tab-3 " class="tab-pane fade show p-0 ">
-                    <div class="row g-4 ">
-                        <div class="col-lg-4 col-md-6 ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid "
-                                            src="{{ asset('user/img/property-1.jpg') }} " alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Sell</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Appartment</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">$12,345</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid "
-                                            src="{{ asset('user/img/property-2.jpg') }} " alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Rent</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Villa</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">$12,345</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid "
-                                            src="{{ asset('user/img/property-3.jpg ') }}" alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Sell</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Office</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">$12,345</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid "
-                                            src="{{ asset('user/img/property-4.jpg ') }}" alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Rent</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Building</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">$12,345</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid "
-                                            src="{{ asset('user/img/property-5.jpg') }} " alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Sell</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Home</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">$12,345</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 ">
-                            <div class="property-item rounded overflow-hidden ">
-                                <div class="position-relative overflow-hidden ">
-                                    <a href=" "><img class="img-fluid "
-                                            src="{{ asset('user/img/property-6.jpg ') }}" alt=" "></a>
-                                    <div
-                                        class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                        For Rent</div>
-                                    <div
-                                        class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
-                                        Shop</div>
-                                </div>
-                                <div class="p-4 pb-0 ">
-                                    <h5 class="text-primary mb-3 ">$12,345</h5>
-                                    <a class="d-block h5 mb-2 " href=" ">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top ">
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-ruler-combined text-primary me-2 "></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2 "><i
-                                            class="fa fa-bed text-primary me-2 "></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2 "><i
-                                            class="fa fa-bath text-primary me-2 "></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 text-center ">
-                            <a class="btn btn-primary py-3 px-5 " href=" ">Browse More Property</a>
+                        @endforeach
+                        <div class="pagination-wrapper">
+                            {{ $property->links('pagination.custom') }}
                         </div>
                     </div>
                 </div>

@@ -30,13 +30,15 @@ Route::post('/loginUser', [RegisterController::class, 'loginUser'])->name('login
 Route::get('/optconfirm/{email}', [RegisterController::class, 'otpconfirm'])->name('otpconfirm');
 
 // Property
-Route::get('/createProperty',[AdminController::class,'createProperty'])->name('createProperty');
-Route::post('/addProperty', [AdminController::class,'addProperty'])->name('addProperty');
-Route::get('/property/{type}', [AdminController::class,'Listproperty'])->name('Listproperty');
-Route::delete('/propertydelete/{id}', [AdminController::class,'ListpropertyDelete'])->name('ListpropertyDelete');
-Route::get('/propertyedit/{id}', [AdminController::class,'Listpropertyedit'])->name('Listpropertyedit');
+Route::get('/createProperty', [AdminController::class, 'createProperty'])->name('createProperty');
+Route::post('/addProperty', [AdminController::class, 'addProperty'])->name('addProperty');
+Route::get('/property/{type}', [AdminController::class, 'Listproperty'])->name('Listproperty');
+Route::delete('/propertydelete/{id}', [AdminController::class, 'ListpropertyDelete'])->name('ListpropertyDelete');
+Route::get('/propertyedit/{id}', [AdminController::class, 'Listpropertyedit'])->name('Listpropertyedit');
 
 
 // User Route
-Route::get('/',[WebsiteController::class,'index'])->name('home.index');
-Route::get('/about',[WebsiteController::class,'about'])->name('about');
+Route::get('/', [WebsiteController::class, 'index'])->name('home.index');
+Route::get('/about', [WebsiteController::class, 'about'])->name('about');
+Route::get('/propertyView/{id}', [WebsiteController::class, 'propertyView'])->name('propertyView');
+

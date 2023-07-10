@@ -91,6 +91,7 @@ class AdminController extends Controller
         return back();
     }
     public function Listpropertyedit($id){
-        
+
     }
+
 }
