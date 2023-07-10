@@ -42,48 +42,70 @@
                 <a href="#" class="h1"><b>FBSO.com</b></a>
             </div>
             <div class="card-body">
+                @if (session('message'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('message') }} Contact With Admin
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @elseif(session('error'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
                 <p class="login-box-msg">Login</p>
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-                    <div class="input-group mb-3">
-                        <input id="email" placeholder="Enter Email" type="email"
-                            class="form-control @error('email') is-invalid @enderror" name="email"
-                            value="{{ old('email') }}" required autocomplete="email" autofocus>
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="input-group mb-3">
-                        <input id="password" placeholder="Enter Password" type="password"
-                            class="form-control @error('password') is-invalid @enderror" name="password" required
-                            autocomplete="current-password">
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Remember Me
-                                </label>
+                @if (Auth::check())
+                    <p>Your are Already Login</p>
+                    <a href="{{ url('home') }}" class="btn btn-primary">Go to Dashboard</a>
+                @else
+                    <form method="POST" action="{{ url('loginUser') }}">
+                        @csrf
+                        <div class="input-group mb-3">
+                            <input id="email" placeholder="Enter Email" type="email"
+                                class="form-control @error('email') is-invalid @enderror" name="email"
+                                value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="input-group mb-3">
+                            <input id="password" placeholder="Enter Password" type="password"
+                                class="form-control @error('password') is-invalid @enderror" name="password" required
+                                autocomplete="current-password">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="icheck-primary">
+                                    <input type="checkbox" id="remember">
+                                    <label for="remember">
+                                        Remember Me
+                                    </label>
+                                </div>
                             </div>
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            </div>
+                            <!-- /.col -->
                         </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                </form>
-                <p class="mb-0">
-                    <a href="{{ url('/register') }}" class="text-center">Register your self</a>
-                </p>
+                    </form>
+                    <p class="mb-0">
+                        <a href="{{ url('/register') }}" class="text-center">Register your self</a>
+                    </p>
+                @endif
+
             </div>
             <!-- /.card-body -->
         </div>

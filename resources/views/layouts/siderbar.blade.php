@@ -27,7 +27,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li class="nav-item {{ Route::is('home') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ Route::is('home') ? 'active' : '' }}">
+                            <a href="{{ url('home') }}" class="nav-link {{ Route::is('home') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -47,8 +47,10 @@
 
                         {{-- Property Dealer --}}
                         @if (Auth::user()->role_id == '3')
-                            <li class="nav-item {{ Route::is('propertyRent') ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link {{ Route::is('propertyRent') ? 'active' : '' }}">
+                            <li
+                                class="nav-item {{ ((Route::is('propertyRent') ? 'menu-open' : '' || Route::is('createProperty')) ? 'menu-open' : '' || Route::is('Listproperty')) ? 'menu-open' : '' }}">
+                                <a href="#"
+                                    class="nav-link {{ ((Route::is('propertyRent') ? 'active' : '' || Route::is('createProperty')) ? 'active' : '' || Route::is('Listproperty')) ? 'active' : '' }}">
                                     <i class="nav-icon fa fa-building"></i>
                                     <p>
                                         My Properties
@@ -57,13 +59,21 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ url('createProperty') }}"
+                                            class="nav-link {{ Route::is('createProperty') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Add new Property</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ url('property/rent') }}"
+                                            class="nav-link {{ Route::is('Listproperty') ? 'active' : '' }}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Rent</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ url('property/sell') }}" class="nav-link {{ Route::is('Listproperty') ? 'active' : '' }}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Sell</p>
                                         </a>
@@ -82,36 +92,36 @@
                         @endif
 
 
-                        @if (Auth::user()->role_id=='1')
-                        <li class="nav-item {{ Route::is('users') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ Route::is('users') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>
-                                    Users
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agents</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Customers</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Property dealers</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        @if (Auth::user()->role_id == '1')
+                            <li class="nav-item {{ Route::is('users') ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link {{ Route::is('users') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Users
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Agents</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Customers</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Property dealers</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                         @endif
                         <li class="nav-item">
                             <a href="#" class="nav-link">

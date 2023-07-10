@@ -128,7 +128,6 @@
                                     <img class="img-fluid" src="{{ asset($item->image) }}" alt="Icon">
                                 </div>
                                 <h6>{{ $item->name }}</h6>
-                                <span>123 Properties</span>
                             </div>
                         </a>
                     </div>

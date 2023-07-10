@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Website\WebsiteController;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +23,18 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/propertyRent', [HomeController::class, 'propertyRent'])->name('propertyRent');
 Route::get('/users', [HomeController::class, 'users'])->name('users');
+
+// Login and registration
+Route::post('/registerUser', [RegisterController::class, 'registerUser'])->name('registerUser');
+Route::post('/loginUser', [RegisterController::class, 'loginUser'])->name('loginUser');
+Route::get('/optconfirm/{email}', [RegisterController::class, 'otpconfirm'])->name('otpconfirm');
+
+// Property
+Route::get('/createProperty',[AdminController::class,'createProperty'])->name('createProperty');
+Route::post('/addProperty', [AdminController::class,'addProperty'])->name('addProperty');
+Route::get('/property/{type}', [AdminController::class,'Listproperty'])->name('Listproperty');
+Route::delete('/propertydelete/{id}', [AdminController::class,'ListpropertyDelete'])->name('ListpropertyDelete');
+Route::get('/propertyedit/{id}', [AdminController::class,'Listpropertyedit'])->name('Listpropertyedit');
 
 
 // User Route

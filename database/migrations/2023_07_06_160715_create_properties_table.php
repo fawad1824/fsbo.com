@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('type');
             $table->string('ptype');
+            $table->string('ptype2');
             $table->string('areaname');
             $table->string('size');
             $table->string('sizeM');
@@ -27,11 +28,10 @@ return new class extends Migration
             $table->string('condition');
             $table->string('desc');
             $table->string('image');
-            $table->string('contactnumber');
-            $table->string('yourname');
-            $table->string('amenities_id');
-            $table->string('gallery_id');
-            $table->string('avaiaplble_id');
+            $table->string('amenities_id')->nullable();
+            $table->string('user_id')->nullable();
+            $table->string('status')->nullable();
+            $table->string('is_like')->nullable();
             $table->timestamps();
         });
     }

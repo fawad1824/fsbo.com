@@ -39,9 +39,18 @@
                 <a href="#" class="h1"><b>FBSO.com</b></a>
             </div>
             <div class="card-body">
+                @if (session('email'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Please check your email: </strong> {{ session('email') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
                 <p class="login-box-msg">Register</p>
 
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ url('registerUser') }}">
                     @csrf
                     <div class="input-group mb-3">
                         <input id="name" type="text" placeholder="Enter Name"
@@ -65,6 +74,21 @@
                             </span>
                         @enderror
                     </div>
+
+                    <div class="input-group mb-3">
+                        <select name="role_id" id="role_id" value="{{ old('role_id') }}" class="form-control @error('role_id') is-invalid @enderror">
+                            <option value="2">Agent</option>
+                            <option value="3">Dealer</option>
+                            <option value="4">User</option>
+                        </select>
+
+                        @error('role_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
                     <div class="input-group mb-3">
                         <input id="password" placeholder="Enter Password" type="password"
                             class="form-control @error('password') is-invalid @enderror" name="password" required

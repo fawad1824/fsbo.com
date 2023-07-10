@@ -38,6 +38,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('user/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('user/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('user/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
     <!-- Libraries Stylesheet -->
     <link href="{{ asset('user/lib/animate/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('user/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
@@ -185,6 +190,45 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('user/js/main.js') }}"></script>
+
+
+    <!-- jQuery -->
+    <script src="{{ asset('user/plugins/jquery/jquery.min.js') }} "></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('user/plugins/bootstrap/js/bootstrap.bundle.min.js') }} "></script>
+    <!-- DataTables  & Plugins -->
+    <script src="{{ asset('user/plugins/datatables/jquery.dataTables.min.js') }} "></script>
+    <script src="{{ asset('user/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }} "></script>
+    <script src="{{ asset('user/plugins/datatables-responsive/js/dataTables.responsive.min.js') }} "></script>
+    <script src="{{ asset('user/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }} "></script>
+    <script src="{{ asset('user/plugins/datatables-buttons/js/dataTables.buttons.min.js') }} "></script>
+    <script src="{{ asset('user/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }} "></script>
+    <script src="{{ asset('user/plugins/jszip/jszip.min.js') }} "></script>
+    <script src="{{ asset('user/plugins/pdfmake/pdfmake.min.js') }} "></script>
+    <script src="{{ asset('user/plugins/pdfmake/vfs_fonts.js') }} "></script>
+    <script src="{{ asset('user/plugins/datatables-buttons/js/buttons.html5.min.js') }} "></script>
+    <script src="{{ asset('user/plugins/datatables-buttons/js/buttons.print.min.js') }} "></script>
+    <script src="{{ asset('user/plugins/datatables-buttons/js/buttons.colVis.min.js') }} "></script>
+
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 </body>
 
 </html>

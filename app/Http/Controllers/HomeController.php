@@ -23,12 +23,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $title="Add New Property";
+        $title1="Home";
+        return view('home',compact('title','title1'));
     }
     public function propertyRent(){
 
     }
     public function users(){
-        
+
     }
 }

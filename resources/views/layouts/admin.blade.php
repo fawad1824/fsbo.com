@@ -18,6 +18,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('admin/dist/css/adminlte.min.css') }}">
+    {{-- Jquery CDN --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
         .btn-primary:not(:disabled):not(.disabled).active,
         .btn-primary:not(:disabled):not(.disabled):active,
