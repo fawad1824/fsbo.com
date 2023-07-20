@@ -22,7 +22,13 @@ Auth::routes();
 // Admin Routes
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/propertyRent', [HomeController::class, 'propertyRent'])->name('propertyRent');
-Route::get('/users', [HomeController::class, 'users'])->name('users');
+Route::get('/users/admin', [HomeController::class, 'users'])->name('users.admin');
+
+Route::get('/addUser', [HomeController::class, 'addUser'])->name('users.add');
+Route::get('/edit/users/{id}', [HomeController::class, 'usersedit'])->name('users.edit.admin');
+Route::delete('/delete/users/{id}', [HomeController::class, 'usersdelete'])->name('users.delete.admin');
+
+
 
 // Login and registration
 Route::post('/registerUser', [RegisterController::class, 'registerUser'])->name('registerUser');

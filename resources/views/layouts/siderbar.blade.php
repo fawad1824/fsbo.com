@@ -73,7 +73,8 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ url('property/sell') }}" class="nav-link {{ Route::is('Listproperty') ? 'active' : '' }}">
+                                        <a href="{{ url('property/sell') }}"
+                                            class="nav-link {{ Route::is('Listproperty') ? 'active' : '' }}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Sell</p>
                                         </a>
@@ -102,6 +103,12 @@
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ url('/users/admin') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Admin</p>
+                                        </a>
+                                    </li>
                                     <li class="nav-item">
                                         <a href="#" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>

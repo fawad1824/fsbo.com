@@ -76,7 +76,31 @@
                     </div>
 
                     <div class="input-group mb-3">
-                        <select name="role_id" id="role_id" value="{{ old('role_id') }}" class="form-control @error('role_id') is-invalid @enderror">
+                        <input id="address" type="text" placeholder="Enter address"
+                            class="form-control @error('address') is-invalid @enderror" name="address"
+                            value="{{ old('address') }}" required autocomplete="address">
+
+                        @error('address')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="input-group mb-3">
+                        <input id="phone" type="number" placeholder="Enter phone"
+                            class="form-control @error('phone') is-invalid @enderror" name="phone"
+                            value="{{ old('phone') }}" required autocomplete="phone">
+
+                        @error('phone')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <select name="role_id" id="role_id" value="{{ old('role_id') }}"
+                            class="form-control @error('role_id') is-invalid @enderror">
                             <option value="2">Agent</option>
                             <option value="3">Dealer</option>
                             <option value="4">User</option>

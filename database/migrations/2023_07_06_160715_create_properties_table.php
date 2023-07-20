@@ -28,7 +28,6 @@ return new class extends Migration
             $table->string('condition');
             $table->string('desc');
             $table->string('image');
-            $table->string('amenities_id')->nullable();
             $table->string('user_id')->nullable();
             $table->string('status')->nullable();
             $table->string('is_like')->nullable();
