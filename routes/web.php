@@ -46,5 +46,11 @@ Route::get('/propertyedit/{id}', [AdminController::class, 'Listpropertyedit'])->
 // User Route
 Route::get('/', [WebsiteController::class, 'index'])->name('home.index');
 Route::get('/about', [WebsiteController::class, 'about'])->name('about');
+Route::get('/contact', [WebsiteController::class, 'contact'])->name('contact');
+Route::get('/terms', [WebsiteController::class, 'terms'])->name('terms');
+Route::get('/policy', [WebsiteController::class, 'policy'])->name('policy');
+Route::get('/dealer/{id}', [WebsiteController::class, 'singleDealer'])->name('singleDealer');
+Route::get('/dealer', [WebsiteController::class, 'dealer'])->name('dealer');
+Route::get('/properties', [WebsiteController::class, 'properties'])->name('properties');
 Route::get('/propertyView/{id}', [WebsiteController::class, 'propertyView'])->name('propertyView');
 

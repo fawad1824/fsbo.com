@@ -30,7 +30,8 @@ return new class extends Migration
             $table->string('image');
             $table->string('user_id')->nullable();
             $table->string('status')->nullable();
-            $table->string('is_like')->nullable();
+            $table->string('sectors')->nullable();
+            $table->string('feature')->nullable();
             $table->timestamps();
         });
     }

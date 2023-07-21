@@ -86,9 +86,10 @@
                             class="nav-item nav-link {{ Route::is('home.index') ? 'active' : '' }}">Home</a>
                         <a href="{{ url('about') }}"
                             class="nav-item nav-link {{ Route::is('about') ? 'active' : '' }}">About</a>
-                        <a href="property-agent.html" class="nav-item nav-link">Dealers</a>
-                        <a href="property-list.html" class="nav-item nav-link">Properties</a>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="{{ url('dealer') }}"
+                            class="nav-item nav-link {{ Route::is('dealer') ? 'active' : '' }}">Dealers</a>
+                        <a href="{{ url('properties') }}" class="nav-item nav-link {{ Route::is('properties') ? 'active' : '' }}">Properties</a>
+                        <a href="{{ url('contact') }}" class="nav-item nav-link  {{ Route::is('contact') ? 'active' : '' }}">Contact</a>
                         @guest
                             @if (Route::has('login'))
                                 <a href="{{ url('/login') }}" class="nav-item nav-link">Login</a>
@@ -108,7 +109,7 @@
                             </form>
                         @endguest
                     </div>
-                    <a href="#" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
+                    <a href="{{ url('createProperty') }}" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
                 </div>
             </nav>
         </div>
@@ -119,7 +120,7 @@
 
 
         <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn " data-wow-delay="0.1s ">
+        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn ">
             <div class="container py-5 ">
                 <div class="row g-5 ">
                     <div class="col-lg-4 col-md-6 ">
@@ -140,11 +141,12 @@
                     </div>
                     <div class="col-lg-4 col-md-6 ">
                         <h5 class="text-white mb-4 ">Quick Links</h5>
-                        <a class="btn btn-link text-white-50 " href=" ">About Us</a>
-                        <a class="btn btn-link text-white-50 " href=" ">Contact Us</a>
-                        <a class="btn btn-link text-white-50 " href=" ">Our Services</a>
-                        <a class="btn btn-link text-white-50 " href=" ">Privacy Policy</a>
-                        <a class="btn btn-link text-white-50 " href=" ">Terms & Condition</a>
+                        <a class="btn btn-link text-white-50 " href="{{ url('about') }} ">About Us</a>
+                        <a class="btn btn-link text-white-50 " href="{{ url('contact') }}  ">Contact Us</a>
+                        <a class="btn btn-link text-white-50 " href="{{ url('about') }}  ">Our Services</a>
+                        <a class="btn btn-link text-white-50 " href="{{ url('policy') }} ">Privacy Policy</a>
+                        <a class="btn btn-link text-white-50 " href="{{ url('terms') }}
+                         ">Terms & Condition</a>
                     </div>
 
                     <div class="col-lg-4 col-md-6 ">

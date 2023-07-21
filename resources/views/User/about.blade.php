@@ -68,7 +68,6 @@
                             </div>
                             <div class="text-center p-4 mt-3 ">
                                 <h5 style="font-size: 17px;" class="fw-bold mb-0 ">{{ $item->name }}</h5>
-                                <small>View Profile</small>
                             </div>
                         </div>
                     </div>

@@ -25,6 +25,7 @@ class properties extends Model
         'amenities_id',
         'user_id',
         'status',
-        'is_like'
+        'sectors',
+        'feature'
     ];
 }

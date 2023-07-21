@@ -90,9 +90,19 @@
         @csrf
         <div class="form-group">
             <label style="width: 100%" for="">What do you want to do?</label>
-            <select name="TypeProperty" required style="width: 50%" id="TypeProperty" class="form-control">
+            <select name="TypeProperty" required style="width: 100%" id="TypeProperty" class="form-control">
                 <option value="rent">Rent</option>
                 <option value="sell">Sell</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label style="width: 100%" for="">Please select your Sector?</label>
+            <select name="sectors" required style="width: 100%" id="sectors" class="form-control sectors">
+                @foreach ($propertysector as $item)
+                    <option value="{{ $item->id }}">{{ $item->sectors }}</option>
+                @endforeach
             </select>
         </div>
 

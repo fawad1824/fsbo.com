@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Galleries;
 use App\Models\Admin\properties;
 use App\Models\Admin\propertieskind;
+use App\Models\Admin\Sectors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,8 @@ class AdminController extends Controller
         $title1 = "Home";
 
         $propertyKinds = propertieskind::all();
-        return view('Admin.Property.create', compact('title', 'title1', 'propertyKinds'));
+        $propertysector = Sectors::all();
+        return view('Admin.Property.create', compact('title', 'title1', 'propertyKinds','propertysector'));
     }
     public function addProperty(Request $request)
     {
@@ -41,6 +43,7 @@ class AdminController extends Controller
         $property->desc = $request->desc;
         $property->user_id = Auth::user()->id;
         $property->status = '0';
+        $property->sectors = $request->sectors;
 
         if ($request->hasFile('fileinput1')) {
             $image = $request->file('fileinput1');
