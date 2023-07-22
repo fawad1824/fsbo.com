@@ -23,8 +23,12 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/propertyRent', [HomeController::class, 'propertyRent'])->name('propertyRent');
 Route::get('/users/admin', [HomeController::class, 'users'])->name('users.admin');
+Route::get('/users/agent', [HomeController::class, 'usersagent'])->name('user.agent');
+Route::get('/users/user', [HomeController::class, 'usersuser'])->name('users.user');
+Route::get('/users/dealer', [HomeController::class, 'usersdealer'])->name('users.dealer');
 
 Route::get('/addUser', [HomeController::class, 'addUser'])->name('users.add');
+Route::post('/addCreateUser', [HomeController::class, 'addCreateUser'])->name('usersCreate');
 Route::get('/edit/users/{id}', [HomeController::class, 'usersedit'])->name('users.edit.admin');
 Route::delete('/delete/users/{id}', [HomeController::class, 'usersdelete'])->name('users.delete.admin');
 

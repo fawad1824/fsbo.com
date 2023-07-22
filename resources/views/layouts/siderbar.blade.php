@@ -36,17 +36,36 @@
                         </li>
 
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Simple Link
-                                </p>
-                            </a>
-                        </li>
+
 
                         {{-- Property Dealer --}}
                         @if (Auth::user()->role_id == '3')
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>
+                                        My Bookings
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>
+                                        Users Bookings
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>
+                                        Users Appointments
+                                    </p>
+                                </a>
+                            </li>
+
                             <li
                                 class="nav-item {{ ((Route::is('propertyRent') ? 'menu-open' : '' || Route::is('createProperty')) ? 'menu-open' : '' || Route::is('Listproperty')) ? 'menu-open' : '' }}">
                                 <a href="#"
@@ -92,7 +111,6 @@
                             </li>
                         @endif
 
-
                         @if (Auth::user()->role_id == '1')
                             <li class="nav-item {{ Route::is('users') ? 'menu-open' : '' }}">
                                 <a href="#" class="nav-link {{ Route::is('users') ? 'active' : '' }}">
@@ -110,19 +128,19 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ url('/users/agent') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Agents</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ url('/users/user') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Customers</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ url('/users/dealer') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Property dealers</p>
                                         </a>
@@ -130,6 +148,7 @@
                                 </ul>
                             </li>
                         @endif
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>
