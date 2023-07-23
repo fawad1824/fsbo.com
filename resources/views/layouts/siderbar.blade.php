@@ -61,6 +61,14 @@
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-book"></i>
                                     <p>
+                                        My Appointments
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>
                                         Users Appointments
                                     </p>
                                 </a>
@@ -111,7 +119,16 @@
                             </li>
                         @endif
 
+                        {{-- Admin --}}
                         @if (Auth::user()->role_id == '1')
+                            <li class="nav-item">
+                                <a href="{{ url('userscontact') }}" class="nav-link {{ Route::is('userscontact') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Contacts
+                                    </p>
+                                </a>
+                            </li>
                             <li class="nav-item {{ Route::is('users') ? 'menu-open' : '' }}">
                                 <a href="#" class="nav-link {{ Route::is('users') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-users"></i>

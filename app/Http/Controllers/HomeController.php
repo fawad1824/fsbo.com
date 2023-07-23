@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -62,9 +63,9 @@ class HomeController extends Controller
         return view('Admin.Users.dealer', compact('title', 'title1', 'user'));
     }
 
-//     usersagent
-// usersuser
-// usersdealer
+    //     usersagent
+    // usersuser
+    // usersdealer
     public function usersedit($id)
     {
         $user = User::where('id', $id)->first();
@@ -115,5 +116,17 @@ class HomeController extends Controller
             'address' => $data['address'],
         ]);
         return redirect()->back()->with('success', 'User Added successfully.');
+    }
+    public function userscontact()
+    {
+        $user=Contact::all();
+        $title = "Users Create";
+        $title1 = "Users";
+        return  view('Admin.contact.users',compact('user','title','title1'));
+    }
+    public function usersuserscontact($id)
+    {
+        Contact::find($id)->delete();
+        return redirect()->back()->with('success', 'Contact Deleted successfully.');
     }
 }

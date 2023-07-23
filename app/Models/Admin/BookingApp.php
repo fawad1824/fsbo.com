@@ -20,6 +20,7 @@ class BookingApp extends Model
         'email',
         'desciption',
         'booking_id',
-        'appointment_id'
+        'appointment_id',
+        'status',
     ];
 }

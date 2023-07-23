@@ -1,7 +1,20 @@
 @extends('layouts.website')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+<script type="text/javascript" src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js></script>
+<link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 
 @section('content')
     <style>
+        button.close {
+            background: white;
+            border: none;
+        }
+
+        button.btn.btn-dark.py-3.px-4.me-2.pl-2 {
+            margin-left: 16px;
+        }
+
         .img-fluid {
             max-width: 100%;
             height: 450px;
@@ -44,6 +57,11 @@
     <!-- About Start -->
     <div class="container-xxl py-5 ">
         <div class="container ">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="row g-5 align-items-center ">
                 <div class="col-lg-6 wow fadeIn ">
                     <div class="about-img position-relative overflow-hidden p-5 pe-0 ">
@@ -94,7 +112,35 @@
                 @endphp
                 <div class="col-lg-6 wow fadeIn ">
                     <h1 class="mb-4 ">{{ $property->name }} <span class="badge badge-primary"> For
-                            {{ $property->type }} {{ $property->feature == 1 ? ' | Featured' : '' }}</span></h1>
+                            {{ $property->type }} {{ $property->feature == 1 ? ' | Featured' : '' }}</span>
+                        @if (Auth::check())
+                            @php
+                                $isLike = DB::table('likeproperty')
+                                    ->where('user_id', Auth::user()->id)
+                                    ->where('property_id', $property->id)
+                                    ->where('is_like', $property->id)
+                                    ->first();
+                            @endphp
+                            @if ($isLike)
+                                <form method="POST" style="float: right;" action="{{ url('/usersLikeP/'. $property->id) }}">
+                                    @csrf
+                                    <input type="hidden" value="{{ $property->id }}" name="is_like">
+                                    <button style="border: none;background: white;" type="submit">
+                                        <i style="color: red; float: right;" class="nav-icon fa fa-heart"></i>
+                                    </button>
+                                </form>
+                            @else
+                                <form method="POST" style="float: right;" action="{{ url('/usersLikeP/'. $property->id) }}">
+                                    @csrf
+                                    <input type="hidden" value="{{ $property->id }}" name="isN_like">
+                                    <button style="border: none; background: white;" type="submit">
+                                        <i style="float: right;" class="nav-icon fa fa-heart"></i>
+                                    </button>
+                                </form>
+                            @endif
+                        @endif
+
+                    </h1>
 
                     <table class="table">
                         <tbody>
@@ -135,12 +181,45 @@
                             Bath</small>
                     </div>
 
-                    <div class="col-lg-12 wow fadeIn mt-4">
-                        <a href=" " class="btn btn-primary py-3 px-4 me-2 "><i class="fa fa-phone-alt me-2 "></i>Get
-                            Booking</a>
-                        <a href=" " class="btn btn-dark py-3 px-4 "><i class="fa fa-calendar-alt me-2 "></i>Get
-                            Appoinment</a>
-                        <a href="{{ url('/dealer') . '/' . $property->user_id }} " class="btn btn-dark py-3 px-4 "><i
+                    <div class="col-lg-12 wow fadeIn mt-4" style="display:flex">
+
+                        @if (Auth::check())
+                            @php
+                                $checkBook = DB::table('booking')
+                                    ->where('user_id', Auth::user()->id)
+                                    ->where('property_id', $property->id)
+                                    ->where('booking_id', '1')
+                                    ->first();
+
+                                $checkApp = DB::table('booking')
+                                    ->where('user_id', Auth::user()->id)
+                                    ->where('property_id', $property->id)
+                                    ->where('appointment_id', '1')
+                                    ->first();
+                            @endphp
+                            @if ($checkBook)
+                                <p style="margin: 17px 0px;">Already Booked</p>
+                            @else
+                                <button type="button"class="btn btn-primary py-3 px-4 me-2 pl-2" data-toggle="modal"
+                                    data-target="#exampleModalCenter">
+                                    <i class="fa fa-phone-alt me-2 "></i> Get Booking
+                                </button>
+                            @endif
+
+                            @if ($checkApp)
+                                <p style="margin: 17px 19px;">Already Appointment</p>
+                            @else
+                                <button type="button"class="btn btn-dark py-3 px-4 me-2 pl-2" data-toggle="modal"
+                                    data-target="#exampleModalCenter2">
+                                    <i class="fa fa-calendar-alt me-2 "></i>Get Appoinment
+                                </button>
+                            @endif
+                        @else
+                            <p style="margin: 17px 19px;">Your are Not Already Login</p>
+                            <a href="{{ url('login') }}" class="btn btn-primary py-3 px-4 me-2 pl-2">Go to Login</a>
+                        @endif
+
+                        <a href="{{ url('/dealer') . '/' . $property->user_id }} " class="btn btn-dark py-3 px-4 pl-2"><i
                                 class="fa fa-user me-2 "></i>Get
                             Dealer</a>
                     </div>
@@ -179,8 +258,9 @@
                                     <div class="property-item rounded overflow-hidden ">
                                         <div class="position-relative overflow-hidden ">
                                             <a href="{{ url('propertyView/' . $item->id) }} "><img
-                                                    style="width: -webkit-fill-available; height: 220px;" class="img-fluid "
-                                                    src="{{ '/images/' . $item->image }} " alt=" "></a>
+                                                    style="width: -webkit-fill-available; height: 220px;"
+                                                    class="img-fluid " src="{{ '/images/' . $item->image }} "
+                                                    alt=" "></a>
                                             <div
                                                 class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
                                                 For {{ $item->type }} {{ $item->feature == 1 ? ' | Featured' : '' }}
@@ -193,7 +273,8 @@
                                             <h5 class="text-primary mb-3 ">PKR {{ $money }}</h5>
                                             <a class="d-block h5 mb-2 "
                                                 href="{{ url('propertyView/' . $item->id) }} ">{{ $item->name }}</a>
-                                            <p><i class="fa fa-map-marker-alt text-primary me-2 "></i>{{ $item->areaname }}
+                                            <p><i
+                                                    class="fa fa-map-marker-alt text-primary me-2 "></i>{{ $item->areaname }}
                                             </p>
                                         </div>
                                         <div class="d-flex border-top ">
@@ -219,4 +300,131 @@
         </div>
     </div>
     <!-- Property List End -->
+
+
+    <!-- Modal -->
+    <div class="modal fade  bd-example-modal-lg" id="exampleModalCenter" tabindex="1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Booking Property</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/usersBooking" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <input type="text" hidden class="form-control" name="pid"
+                                        value="{{ $property->id }}" id="pid" required>
+                                    <input type="email" class="form-control" name="email" id="email" required>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">Phone</label>
+                                    <input type="number" class="form-control" name="phone" id="phone" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">Date</label>
+                                    <input type="date" value="{{ date('m-d-Y') }}" class="form-control"
+                                        name="date" id="date" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">Time</label>
+                                    <input type="time" class="form-control" name="time" id="time" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">Price</label>
+                                    <input type="number" class="form-control" name="price" id="price" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="">Description</label>
+                                    <textarea name="description" id="description" class="form-control" cols="10" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade  bd-example-modal-lg" id="exampleModalCenter2" tabindex="1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Appointment Booking</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/usersAppointment" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <input type="text" hidden class="form-control" name="pid"
+                                        value="{{ $property->id }}" id="pid" required>
+                                    <input type="email" class="form-control" name="email" id="email" required>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">Phone</label>
+                                    <input type="number" class="form-control" name="phone" id="phone" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">Date</label>
+                                    <input type="date" value="{{ date('m-d-Y') }}" class="form-control"
+                                        name="date" id="date" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">Time</label>
+                                    <input type="time" class="form-control" name="time" id="time" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="">Description</label>
+                                    <textarea name="description" id="description" class="form-control" cols="10" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection

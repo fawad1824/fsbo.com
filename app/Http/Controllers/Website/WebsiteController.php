@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\BookingApp;
 use App\Models\Admin\properties;
 use App\Models\Admin\propertytype;
+use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WebsiteController extends Controller
 {
@@ -57,5 +60,50 @@ class WebsiteController extends Controller
     public function policy()
     {
         return view('User.privacy');
+    }
+    public function userscontactpost(Request $request)
+    {
+        $contact = new Contact();
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->subject = $request->subject;
+        $contact->message = $request->message;
+        $contact->save();
+        return redirect()->back()->with('success', 'Contact Added successfully.');
+    }
+
+    public function usersBooking(Request $request)
+    {
+        $booking = new BookingApp();
+        $booking->property_id = $request->pid;
+        $booking->user_id = Auth::user()->id;
+        $booking->booking_id = '1';
+        $booking->email = $request->email;
+        $booking->phone = $request->phone;
+        $booking->date = $request->date;
+        $booking->time = $request->time;
+        $booking->price = $request->price;
+        $booking->desciption = $request->description;
+        $booking->save();
+        return redirect()->back()->with('success', 'Booking Added successfully.');
+    }
+    public function usersAppointment(Request $request)
+    {
+        $booking = new BookingApp();
+        $booking->property_id = $request->pid;
+        $booking->user_id = Auth::user()->id;
+        $booking->appointment_id = '1';
+        $booking->email = $request->email;
+        $booking->phone = $request->phone;
+        $booking->date = $request->date;
+        $booking->time = $request->time;
+        $booking->price = $request->price;
+        $booking->desciption = $request->description;
+        $booking->save();
+        return redirect()->back()->with('success', 'Booking Added successfully.');
+    }
+    public function usersLikeP(Request $request, $id)
+    {
+        return $request->all();
     }
 }

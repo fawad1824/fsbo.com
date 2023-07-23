@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('desciption');
+            $table->string('status');
             $table->string('booking_id')->default(0);
             $table->string('appointment_id')->default(0);
             $table->timestamps();

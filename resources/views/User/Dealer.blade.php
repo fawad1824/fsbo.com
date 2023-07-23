@@ -78,6 +78,8 @@
                             </div>
                             <div class="text-center p-4 mt-3 ">
                                 <h5 style="font-size: 17px;" class="fw-bold mb-0 ">{{ $item->name }}</h5>
+                                <small><a href="/dealer/{{ $item->id }}">View Profile</a></small>
+
                             </div>
                         </div>
                     </div>

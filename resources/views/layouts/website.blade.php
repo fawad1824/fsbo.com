@@ -193,7 +193,6 @@
     <!-- Template Javascript -->
     <script src="{{ asset('user/js/main.js') }}"></script>
 
-
     <!-- jQuery -->
     <script src="{{ asset('user/plugins/jquery/jquery.min.js') }} "></script>
     <!-- Bootstrap 4 -->

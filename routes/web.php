@@ -31,6 +31,8 @@ Route::get('/addUser', [HomeController::class, 'addUser'])->name('users.add');
 Route::post('/addCreateUser', [HomeController::class, 'addCreateUser'])->name('usersCreate');
 Route::get('/edit/users/{id}', [HomeController::class, 'usersedit'])->name('users.edit.admin');
 Route::delete('/delete/users/{id}', [HomeController::class, 'usersdelete'])->name('users.delete.admin');
+Route::get('/userscontact', [HomeController::class, 'userscontact'])->name('userscontact');
+Route::delete('/delete/userscontact/{id}', [HomeController::class, 'usersuserscontact'])->name('userscontactdelete');
 
 
 
@@ -57,4 +59,8 @@ Route::get('/dealer/{id}', [WebsiteController::class, 'singleDealer'])->name('si
 Route::get('/dealer', [WebsiteController::class, 'dealer'])->name('dealer');
 Route::get('/properties', [WebsiteController::class, 'properties'])->name('properties');
 Route::get('/propertyView/{id}', [WebsiteController::class, 'propertyView'])->name('propertyView');
+Route::post('/userscontactpost', [WebsiteController::class, 'userscontactpost'])->name('userscontactpost');
+Route::post('/usersAppointment', [WebsiteController::class, 'usersAppointment'])->name('usersAppointment');
+Route::post('/usersBooking', [WebsiteController::class, 'usersBooking'])->name('usersBooking');
+Route::post('/usersLikeP/{id}', [WebsiteController::class, 'usersLikeP'])->name('usersLikeP');
 

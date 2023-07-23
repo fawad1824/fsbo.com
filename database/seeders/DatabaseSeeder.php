@@ -127,7 +127,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
             'role_id' => '1',
-            'address' => 'admin',
+            'address' => '122 street sialkot',
             'phone' => '1234566',
             'status' => '2',
         ]);
@@ -137,7 +137,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'agent@gmail.com',
             'password' => bcrypt('agent'),
             'role_id' => '2',
-            'address' => 'admin',
+            'address' => '122 street sialkot',
             'phone' => '1234566',
             'status' => '2',
         ]);
@@ -147,7 +147,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'dealer@gmail.com',
             'password' => bcrypt('dealer'),
             'role_id' => '3',
-            'address' => 'dealer',
+            'address' => '122 street sialkot',
             'phone' => '1234566',
             'status' => '2',
         ]);
@@ -157,7 +157,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@gmail.com',
             'password' => bcrypt('user'),
             'role_id' => '4',
-            'address' => 'admin',
+            'address' => '122 street sialkot',
             'phone' => '1234566',
             'status' => '2',
         ]);
