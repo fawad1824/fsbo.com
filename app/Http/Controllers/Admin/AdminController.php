@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\BookingApp;
 use App\Models\Admin\Galleries;
 use App\Models\Admin\properties;
 use App\Models\Admin\propertieskind;
 use App\Models\Admin\Sectors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDO;
 
 class AdminController extends Controller
 {
@@ -23,7 +25,7 @@ class AdminController extends Controller
 
         $propertyKinds = propertieskind::all();
         $propertysector = Sectors::all();
-        return view('Admin.Property.create', compact('title', 'title1', 'propertyKinds','propertysector'));
+        return view('Admin.Property.create', compact('title', 'title1', 'propertyKinds', 'propertysector'));
     }
     public function addProperty(Request $request)
     {
@@ -93,8 +95,47 @@ class AdminController extends Controller
         Galleries::where('prop_id', $id)->first()->delete();
         return back();
     }
-    public function Listpropertyedit($id){
-
+    public function Listpropertyedit($id)
+    {
     }
+    public function myBooking($type)
+    {
+        if ($type == 'my_booking') {
+            $title = "My Booking";
+            $title1 = "Home";
+            $booking = BookingApp::where('user_id', Auth::user()->id)->where('booking_id', '1')->get();
+        } else if ($type == 'user_booking') {
+            $title = "All Booking";
+            $title1 = "Home";
+            $booking = BookingApp::where('contactuser_id', Auth::user()->id)->where('booking_id', '1')->get();
+        } else if ($type == 'my_appointment') {
+            $title = "My Appointment";
+            $title1 = "Home";
+            $booking = BookingApp::where('user_id', Auth::user()->id)->where('appointment_id', '1')->get();
+        } else if ($type == 'users_appointment') {
+            $title = "All Appointment";
+            $title1 = "Home";
+            $booking = BookingApp::where('user_id', Auth::user()->id)->where('appointment_id', '1')->get();
+        }
 
+
+        return view('Admin.booking.booking', compact('title', 'title1', 'booking', 'type'));
+    }
+    public function myBookingdelete($id)
+    {
+        BookingApp::find($id)->delete();
+        return redirect()->back()->with('success', 'Booking Deleted successfully.');
+    }
+    public function Bookingstatus(Request $request)
+    {
+        $book = BookingApp::where('id', $request->pID)->where('contactuser_id', $request->UID)->first();
+        if ($request->status == '3') {
+            $prop = properties::where('id', $book->property_id)->first();
+            $prop->status = $request->status;
+            $prop->save();
+        }
+        $book->status = $request->status;
+        $book->save();
+        return redirect()->back()->with('success', 'Booking Status successfully.');
+    }
 }

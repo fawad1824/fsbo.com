@@ -42,11 +42,9 @@
                                     <td>{{ $item->size . ' ' . ' (' . $item->sizeM . ' )' }}</td>
                                     <td>{{ $item->price }}</td>
                                     @if ($item->status == '0')
-                                        <td>Pending</td>
-                                    @elseif($item->status == '1')
-                                        <td>Not Sale</td>
-                                    @elseif($item->status == '2')
-                                        <td>Sale</td>
+                                        <td><span class="badge badge-primary">Pending</span></td>
+                                    @elseif($item->status == '3')
+                                        <td> <span class="badge badge-danger">Sold</span></td>
                                     @endif
                                     <td class="d-flex">
                                         <a href="{{ url('propertyedit/' . $item->id) }}"

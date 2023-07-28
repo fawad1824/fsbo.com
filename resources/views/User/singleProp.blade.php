@@ -122,7 +122,8 @@
                                     ->first();
                             @endphp
                             @if ($isLike)
-                                <form method="POST" style="float: right;" action="{{ url('/usersLikeP/'. $property->id) }}">
+                                <form method="POST" style="float: right;"
+                                    action="{{ url('/usersLikeP/' . $property->id) }}">
                                     @csrf
                                     <input type="hidden" value="{{ $property->id }}" name="is_like">
                                     <button style="border: none;background: white;" type="submit">
@@ -130,7 +131,8 @@
                                     </button>
                                 </form>
                             @else
-                                <form method="POST" style="float: right;" action="{{ url('/usersLikeP/'. $property->id) }}">
+                                <form method="POST" style="float: right;"
+                                    action="{{ url('/usersLikeP/' . $property->id) }}">
                                     @csrf
                                     <input type="hidden" value="{{ $property->id }}" name="isN_like">
                                     <button style="border: none; background: white;" type="submit">
@@ -168,6 +170,15 @@
                                 <th scope="row">Price</th>
                                 <td>{{ $property->price }} PKR </td>
                             </tr>
+                            <tr>
+                                <th scope="row">Status</th>
+                                @if ($property->status == 1)
+                                    <td><span style="background: rgb(38, 0, 255);color: white;"class="badge badge-primary">In-stock</span> </td>
+                                @elseif($property->status == 3)
+                                    <td><span style="background: red;color: white;"
+                                            class="badge badge-danger">Sold</span></td>
+                                @endif
+                            </tr>
                         </tbody>
                     </table>
                     <div class="d-flex border-top ">
@@ -183,41 +194,44 @@
 
                     <div class="col-lg-12 wow fadeIn mt-4" style="display:flex">
 
-                        @if (Auth::check())
-                            @php
-                                $checkBook = DB::table('booking')
-                                    ->where('user_id', Auth::user()->id)
-                                    ->where('property_id', $property->id)
-                                    ->where('booking_id', '1')
-                                    ->first();
+                        @if ($property->status != '3')
+                            @if (Auth::check())
+                                @php
+                                    $checkBook = DB::table('booking')
+                                        ->where('user_id', Auth::user()->id)
+                                        ->where('property_id', $property->id)
+                                        ->where('booking_id', '1')
+                                        ->first();
 
-                                $checkApp = DB::table('booking')
-                                    ->where('user_id', Auth::user()->id)
-                                    ->where('property_id', $property->id)
-                                    ->where('appointment_id', '1')
-                                    ->first();
-                            @endphp
-                            @if ($checkBook)
-                                <p style="margin: 17px 0px;">Already Booked</p>
-                            @else
-                                <button type="button"class="btn btn-primary py-3 px-4 me-2 pl-2" data-toggle="modal"
-                                    data-target="#exampleModalCenter">
-                                    <i class="fa fa-phone-alt me-2 "></i> Get Booking
-                                </button>
-                            @endif
+                                    $checkApp = DB::table('booking')
+                                        ->where('user_id', Auth::user()->id)
+                                        ->where('property_id', $property->id)
+                                        ->where('appointment_id', '1')
+                                        ->first();
+                                @endphp
+                                @if ($checkBook)
+                                    <p style="margin: 17px 0px;">Already Booked</p>
+                                @else
+                                    <button type="button"class="btn btn-primary py-3 px-4 me-2 pl-2" data-toggle="modal"
+                                        data-target="#exampleModalCenter">
+                                        <i class="fa fa-phone-alt me-2 "></i> Get Booking
+                                    </button>
+                                @endif
 
-                            @if ($checkApp)
-                                <p style="margin: 17px 19px;">Already Appointment</p>
+                                @if ($checkApp)
+                                    <p style="margin: 17px 19px;">Already Appointment</p>
+                                @else
+                                    <button type="button"class="btn btn-dark py-3 px-4 me-2 pl-2" data-toggle="modal"
+                                        data-target="#exampleModalCenter2">
+                                        <i class="fa fa-calendar-alt me-2 "></i>Get Appoinment
+                                    </button>
+                                @endif
                             @else
-                                <button type="button"class="btn btn-dark py-3 px-4 me-2 pl-2" data-toggle="modal"
-                                    data-target="#exampleModalCenter2">
-                                    <i class="fa fa-calendar-alt me-2 "></i>Get Appoinment
-                                </button>
+                                <p style="margin: 17px 19px;">Your are Not Already Login</p>
+                                <a href="{{ url('login') }}" class="btn btn-primary py-3 px-4 me-2 pl-2">Go to Login</a>
                             @endif
-                        @else
-                            <p style="margin: 17px 19px;">Your are Not Already Login</p>
-                            <a href="{{ url('login') }}" class="btn btn-primary py-3 px-4 me-2 pl-2">Go to Login</a>
                         @endif
+
 
                         <a href="{{ url('/dealer') . '/' . $property->user_id }} " class="btn btn-dark py-3 px-4 pl-2"><i
                                 class="fa fa-user me-2 "></i>Get

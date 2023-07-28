@@ -7,6 +7,7 @@ use App\Models\Admin\BookingApp;
 use App\Models\Admin\properties;
 use App\Models\Admin\propertytype;
 use App\Models\Contact;
+use App\Models\LikeProperty;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -76,13 +77,16 @@ class WebsiteController extends Controller
     {
         $booking = new BookingApp();
         $booking->property_id = $request->pid;
+        $propertyName=properties::where('id',$request->pid)->first();
         $booking->user_id = Auth::user()->id;
         $booking->booking_id = '1';
+        $booking->contactuser_id = $propertyName->user_id;
         $booking->email = $request->email;
         $booking->phone = $request->phone;
         $booking->date = $request->date;
         $booking->time = $request->time;
         $booking->price = $request->price;
+        $booking->status = '1';
         $booking->desciption = $request->description;
         $booking->save();
         return redirect()->back()->with('success', 'Booking Added successfully.');
@@ -90,20 +94,42 @@ class WebsiteController extends Controller
     public function usersAppointment(Request $request)
     {
         $booking = new BookingApp();
+        $propertyName=properties::where('id',$request->pid)->first();
         $booking->property_id = $request->pid;
         $booking->user_id = Auth::user()->id;
         $booking->appointment_id = '1';
+        $booking->contactuser_id = $propertyName->user_id;
         $booking->email = $request->email;
         $booking->phone = $request->phone;
         $booking->date = $request->date;
         $booking->time = $request->time;
         $booking->price = $request->price;
+        $booking->status = '1';
         $booking->desciption = $request->description;
         $booking->save();
         return redirect()->back()->with('success', 'Booking Added successfully.');
     }
     public function usersLikeP(Request $request, $id)
     {
-        return $request->all();
+        $like = $request->isN_like == '1';
+        $property = LikeProperty::where('property_id', $id)->where('user_id', Auth::user()->id)->first();
+        if (isset($property)) {
+            if ($like) {
+                $property->is_like = 1;
+                $property->save();
+            }else{
+                $property->is_like = 0;
+                $property->save();
+            }
+        } else {
+            if ($like) {
+                $likep = new LikeProperty();
+                $likep->user_id = Auth::user()->id;
+                $likep->property_id = $id;
+                $likep->is_like = '1';
+                $likep->save();
+            }
+        }
+        return redirect()->back()->with('success', 'Liked successfully.');
     }
 }

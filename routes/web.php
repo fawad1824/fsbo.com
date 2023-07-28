@@ -48,6 +48,11 @@ Route::get('/property/{type}', [AdminController::class, 'Listproperty'])->name('
 Route::delete('/propertydelete/{id}', [AdminController::class, 'ListpropertyDelete'])->name('ListpropertyDelete');
 Route::get('/propertyedit/{id}', [AdminController::class, 'Listpropertyedit'])->name('Listpropertyedit');
 
+// Booking
+Route::get('/booking/{type}', [AdminController::class, 'myBooking'])->name('myBooking');
+Route::delete('/bookingdelete/{id}', [AdminController::class, 'myBookingdelete'])->name('myBookingdelete');
+Route::post('/Bookingstatus', [AdminController::class, 'Bookingstatus'])->name('Bookingstatus');
+
 
 // User Route
 Route::get('/', [WebsiteController::class, 'index'])->name('home.index');

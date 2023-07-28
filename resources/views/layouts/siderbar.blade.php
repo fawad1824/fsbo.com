@@ -41,7 +41,8 @@
                         {{-- Property Dealer --}}
                         @if (Auth::user()->role_id == '3')
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="/booking/my_booking"
+                                    class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-book"></i>
                                     <p>
                                         My Bookings
@@ -50,7 +51,8 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="/booking/user_booking"
+                                    class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-book"></i>
                                     <p>
                                         Users Bookings
@@ -58,7 +60,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="/booking/my_appointment" class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-book"></i>
                                     <p>
                                         My Appointments
@@ -66,7 +68,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="/booking/users_appointment" class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-book"></i>
                                     <p>
                                         Users Appointments
@@ -122,7 +124,25 @@
                         {{-- Admin --}}
                         @if (Auth::user()->role_id == '1')
                             <li class="nav-item">
-                                <a href="{{ url('userscontact') }}" class="nav-link {{ Route::is('userscontact') ? 'active' : '' }}">
+                                <a href="/booking/user_booking"
+                                    class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>
+                                        Users Bookings
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/booking/users_appointment" class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>
+                                        Users Appointments
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('userscontact') }}"
+                                    class="nav-link {{ Route::is('userscontact') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-user"></i>
                                     <p>
                                         Contacts
