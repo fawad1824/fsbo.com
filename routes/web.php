@@ -47,6 +47,8 @@ Route::post('/addProperty', [AdminController::class, 'addProperty'])->name('addP
 Route::get('/property/{type}', [AdminController::class, 'Listproperty'])->name('Listproperty');
 Route::delete('/propertydelete/{id}', [AdminController::class, 'ListpropertyDelete'])->name('ListpropertyDelete');
 Route::get('/propertyedit/{id}', [AdminController::class, 'Listpropertyedit'])->name('Listpropertyedit');
+Route::get('/propertyLike', [AdminController::class, 'propertyLike'])->name('propertyLike');
+Route::post('/propertyApproved', [AdminController::class, 'propertyApproved'])->name('propertyApproved');
 
 // Booking
 Route::get('/booking/{type}', [AdminController::class, 'myBooking'])->name('myBooking');

@@ -60,7 +60,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/booking/my_appointment" class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
+                                <a href="/booking/my_appointment"
+                                    class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-book"></i>
                                     <p>
                                         My Appointments
@@ -68,7 +69,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/booking/users_appointment" class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
+                                <a href="/booking/users_appointment"
+                                    class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-book"></i>
                                     <p>
                                         Users Appointments
@@ -112,10 +114,11 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="/propertyLike"
+                                    class="nav-link {{ Route::is('propertyLike') ? 'active' : '' }}">
                                     <i class="nav-icon fa fa-heart"></i>
                                     <p>
-                                        Liked Properties
+                                        Like Properties
                                     </p>
                                 </a>
                             </li>
@@ -133,13 +136,30 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/booking/users_appointment" class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
+                                <a href="/booking/users_appointment"
+                                    class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-book"></i>
                                     <p>
                                         Users Appointments
                                     </p>
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a href="{{ url('property/rent') }}"
+                                    class="nav-link {{ Route::is('Listproperty') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Rent Properties</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('property/sell') }}"
+                                    class="nav-link {{ Route::is('Listproperty') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Sell Properties</p>
+                                </a>
+                            </li>
+
                             <li class="nav-item">
                                 <a href="{{ url('userscontact') }}"
                                     class="nav-link {{ Route::is('userscontact') ? 'active' : '' }}">
@@ -186,8 +206,39 @@
                             </li>
                         @endif
 
+                        @if (Auth::user()->role_id == '4')
+                            <li class="nav-item">
+                                <a href="/booking/my_booking"
+                                    class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>
+                                        My Bookings
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/booking/my_appointment"
+                                    class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>
+                                        My Appointments
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/propertyLike"
+                                    class="nav-link {{ Route::is('propertyLike') ? 'active' : '' }}">
+                                    <i class="nav-icon fa fa-heart"></i>
+                                    <p>
+                                        Like Properties
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="/edit/users/{{ Auth::user()->id }}" class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>
                                     Profile

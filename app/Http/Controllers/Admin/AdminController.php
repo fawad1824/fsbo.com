@@ -8,6 +8,7 @@ use App\Models\Admin\Galleries;
 use App\Models\Admin\properties;
 use App\Models\Admin\propertieskind;
 use App\Models\Admin\Sectors;
+use App\Models\LikeProperty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDO;
@@ -44,7 +45,7 @@ class AdminController extends Controller
         $property->condition = $request->condition;
         $property->desc = $request->desc;
         $property->user_id = Auth::user()->id;
-        $property->status = '0';
+        $property->status = '10';
         $property->sectors = $request->sectors;
 
         if ($request->hasFile('fileinput1')) {
@@ -103,23 +104,19 @@ class AdminController extends Controller
         if ($type == 'my_booking') {
             $title = "My Booking";
             $title1 = "Home";
-            $booking = BookingApp::where('user_id', Auth::user()->id)->where('booking_id', '1')->get();
         } else if ($type == 'user_booking') {
             $title = "All Booking";
             $title1 = "Home";
-            $booking = BookingApp::where('contactuser_id', Auth::user()->id)->where('booking_id', '1')->get();
         } else if ($type == 'my_appointment') {
             $title = "My Appointment";
             $title1 = "Home";
-            $booking = BookingApp::where('user_id', Auth::user()->id)->where('appointment_id', '1')->get();
+            $booking = BookingApp::where('appointment_id', '1')->get();
         } else if ($type == 'users_appointment') {
             $title = "All Appointment";
             $title1 = "Home";
-            $booking = BookingApp::where('user_id', Auth::user()->id)->where('appointment_id', '1')->get();
+            $booking = BookingApp::where('appointment_id', '1')->get();
         }
-
-
-        return view('Admin.booking.booking', compact('title', 'title1', 'booking', 'type'));
+        return view('Admin.booking.booking', compact('title', 'title1', 'type'));
     }
     public function myBookingdelete($id)
     {
@@ -137,5 +134,19 @@ class AdminController extends Controller
         $book->status = $request->status;
         $book->save();
         return redirect()->back()->with('success', 'Booking Status successfully.');
+    }
+    public function propertyLike()
+    {
+        $title = "Like Propety";
+        $title1 = "Home";
+        $property = LikeProperty::join('properties', 'likeproperty.property_id', 'properties.id')->select('*')->where('is_like', '1')->get();
+        return view('Admin.Property.Like', compact('title', 'title1', 'property'));
+    }
+    public function propertyApproved(Request $request)
+    {
+        $prop=properties::where('id',$request->pID)->first();
+        $prop->status=$request->status;
+        $prop->save();
+        return redirect()->back()->with('success', 'Property Approved.');
     }
 }

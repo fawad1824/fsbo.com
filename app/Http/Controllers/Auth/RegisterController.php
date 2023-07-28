@@ -80,11 +80,11 @@ class RegisterController extends Controller
     public function registerUser(Request $data)
     {
         $data = $data->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'role_id' => 'required',
-            'phone' => 'required|number|max:11|unique:users',
+            'phone' => 'required|max:11|unique:users',
             'address' => 'required',
         ]);
 

@@ -25,42 +25,60 @@
                         </thead>
                         <tbody>
                             @foreach ($property as $item)
-                                @php
-                                    $Ptype = DB::table('propertieskinds')
-                                        ->where('id', $item->ptype)
-                                        ->first();
-                                    $Ptype2 = DB::table('propertieskinds')
-                                        ->where('id', $item->ptype2)
-                                        ->first();
-                                @endphp
-                                <tr style="line-height: 1;">
-                                    <td> <img style="width: 92px;" src="{{ '/images/' . $item->image }}" alt=""></td>
-                                    <td>{{ $item->type }}</td>
-                                    <td>{{ $Ptype->name . ' ' . $Ptype2->name }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->areaname }}</td>
-                                    <td>{{ $item->size . ' ' . ' (' . $item->sizeM . ' )' }}</td>
-                                    <td>{{ $item->price }}</td>
-                                    @if ($item->status == '0')
-                                        <td>Pending</td>
-                                    @elseif($item->status == '1')
-                                        <td>Not Sale</td>
-                                    @elseif($item->status == '2')
-                                        <td>Sale</td>
-                                    @endif
-                                    <td class="d-flex">
-                                        <a href="{{ url('propertyedit/' . $item->id) }}"
-                                            style="margin-top: 4px;height: 32px;" class="btn btn-sm btn-primary"><i
-                                                class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                        <form method="POST" action="{{ url('propertydelete/' . $item->id) }}">
-                                            @csrf
-                                            <input name="_method" type="hidden" value="DELETE">
-                                            <button style="margin: 4px;" type="submit"
-                                                class="btn btn-sm btn-primary  show_confirm" data-toggle="tooltip"
-                                                title='Delete'><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                @if ($item->user_id == Auth::user()->id || Auth::user()->role_id == '1')
+                                    @php
+                                        $Ptype = DB::table('propertieskinds')
+                                            ->where('id', $item->ptype)
+                                            ->first();
+                                        $Ptype2 = DB::table('propertieskinds')
+                                            ->where('id', $item->ptype2)
+                                            ->first();
+                                    @endphp
+                                    <tr style="line-height: 1;">
+                                        <td> <img style="width: 92px;" src="{{ '/images/' . $item->image }}" alt="">
+                                        </td>
+                                        <td>{{ $item->type }}</td>
+                                        <td>{{ $Ptype->name . ' ' . $Ptype2->name }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->areaname }}</td>
+                                        <td>{{ $item->size . ' ' . ' (' . $item->sizeM . ' )' }}</td>
+                                        <td>{{ $item->price }}</td>
+                                        @if ($item->status == '0')
+                                            <td><span class="badge badge-primary">Stock</span></td>
+                                        @elseif($item->status == '3')
+                                            <td> <span class="badge badge-danger">Sold</span></td>
+                                        @elseif($item->status == '10')
+                                            <td> <span class="badge badge-primary">Pending</span></td>
+                                        @elseif($item->status == '2')
+                                            <td> <span class="badge badge-danger">Not Approved</span></td>
+                                        @endif
+                                        <td class="d-flex">
+                                            @if (Auth::user()->role_id == '1')
+                                                <button style="margin: 4px;" class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-book" onclick="addBooking({{ $item->id }})"
+                                                        aria-hidden="true"></i>
+                                                </button>
+                                            @endif
+                                            @if ($item->status != '3' && Auth::user()->role_id != '1')
+                                                <a href="{{ url('propertyedit/' . $item->id) }}"
+                                                    style="margin-top: 4px;height: 32px;" class="btn btn-sm btn-primary"><i
+                                                        class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                            @endif
+                                            @if (Auth::user()->role_id != '1')
+                                                <form method="POST" action="{{ url('propertydelete/' . $item->id) }}">
+                                                    @csrf
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                    <button style="margin: 4px;" type="submit"
+                                                        class="btn btn-sm btn-primary  show_confirm" data-toggle="tooltip"
+                                                        title='Delete'><i class="fa fa-trash"
+                                                            aria-hidden="true"></i></button>
+                                                </form>
+                                            @endif
+
+
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
@@ -69,8 +87,45 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade exampleModalCenter" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Property Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/propertyApproved" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Property status</label>
+                            <input type="text" hidden id="pID" name="pID" class="pID">
+                            <select name="status" id="status" class="form-control">
+                                <option value="2">Not Approved</option>
+                                <option value="0">Approved</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script type="text/javascript">
+        function addBooking(itemId) {
+            $('.exampleModalCenter').modal('show');
+            $('.pID').val(itemId);
+        }
         $('.show_confirm').click(function(event) {
             var form = $(this).closest("form");
             var name = $(this).data("name");

@@ -84,14 +84,6 @@ class HomeController extends Controller
     }
     public function addCreateUser(Request $data)
     {
-        // $data = $data->validate([
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users',
-        //     'password' => 'required|string|min:8',
-        //     'role_id' => 'required',
-        //     'phone' => 'required|number|max:11|unique:users',
-        //     'address' => 'required',
-        // ]);
         if ($data['id']) {
             $user = User::where('id', $data['id'])->first();
             $user->name = $data['name'];

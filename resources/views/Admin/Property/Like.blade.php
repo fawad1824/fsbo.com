@@ -49,17 +49,13 @@
                                         <td> <span class="badge badge-primary">Not Approved</span></td>
                                     @endif
                                     <td class="d-flex">
-                                        @if ($item->status != '3')
-                                            <a href="{{ url('propertyedit/' . $item->id) }}"
-                                                style="margin-top: 4px;height: 32px;" class="btn btn-sm btn-primary"><i
-                                                    class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                        @endif
-                                        <form method="POST" action="{{ url('propertydelete/' . $item->id) }}">
+                                        <form method="POST" action="{{ url('usersLikeP/' . $item->id) }}">
                                             @csrf
-                                            <input name="_method" type="hidden" value="DELETE">
+                                            <input name="_method" type="hidden" value="POST">
                                             <button style="margin: 4px;" type="submit"
                                                 class="btn btn-sm btn-primary  show_confirm" data-toggle="tooltip"
-                                                title='Delete'><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                title='Delete'><i class="fa fa-heart" aria-hidden="true"></i>
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -78,8 +74,8 @@
             var name = $(this).data("name");
             event.preventDefault();
             swal({
-                    title: `Are you sure you want to delete this record?`,
-                    text: "If you delete this, it will be gone forever.",
+                    title: `Are you sure you want to dislike`,
+                    text: "If you remove, it will be gone forever.",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

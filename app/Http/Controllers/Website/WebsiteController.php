@@ -77,7 +77,7 @@ class WebsiteController extends Controller
     {
         $booking = new BookingApp();
         $booking->property_id = $request->pid;
-        $propertyName=properties::where('id',$request->pid)->first();
+        $propertyName = properties::where('id', $request->pid)->first();
         $booking->user_id = Auth::user()->id;
         $booking->booking_id = '1';
         $booking->contactuser_id = $propertyName->user_id;
@@ -94,7 +94,7 @@ class WebsiteController extends Controller
     public function usersAppointment(Request $request)
     {
         $booking = new BookingApp();
-        $propertyName=properties::where('id',$request->pid)->first();
+        $propertyName = properties::where('id', $request->pid)->first();
         $booking->property_id = $request->pid;
         $booking->user_id = Auth::user()->id;
         $booking->appointment_id = '1';
@@ -111,24 +111,21 @@ class WebsiteController extends Controller
     }
     public function usersLikeP(Request $request, $id)
     {
-        $like = $request->isN_like == '1';
         $property = LikeProperty::where('property_id', $id)->where('user_id', Auth::user()->id)->first();
         if (isset($property)) {
-            if ($like) {
-                $property->is_like = 1;
+            if ($property->is_like == '1') {
+                $property->is_like = '0';
                 $property->save();
-            }else{
-                $property->is_like = 0;
+            } else if ($property->is_like == '0') {
+                $property->is_like = '1';
                 $property->save();
             }
         } else {
-            if ($like) {
-                $likep = new LikeProperty();
-                $likep->user_id = Auth::user()->id;
-                $likep->property_id = $id;
-                $likep->is_like = '1';
-                $likep->save();
-            }
+            $likep = new LikeProperty();
+            $likep->user_id = Auth::user()->id;
+            $likep->property_id = $id;
+            $likep->is_like = '1';
+            $likep->save();
         }
         return redirect()->back()->with('success', 'Liked successfully.');
     }

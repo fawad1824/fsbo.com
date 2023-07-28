@@ -101,7 +101,6 @@
                     <div class="input-group mb-3">
                         <select name="role_id" id="role_id" value="{{ old('role_id') }}"
                             class="form-control @error('role_id') is-invalid @enderror">
-                            <option value="2">Agent</option>
                             <option value="3">Dealer</option>
                             <option value="4">User</option>
                         </select>

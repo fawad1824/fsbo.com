@@ -118,7 +118,7 @@
                                 $isLike = DB::table('likeproperty')
                                     ->where('user_id', Auth::user()->id)
                                     ->where('property_id', $property->id)
-                                    ->where('is_like', $property->id)
+                                    ->where('is_like', '1')
                                     ->first();
                             @endphp
                             @if ($isLike)
@@ -172,7 +172,7 @@
                             </tr>
                             <tr>
                                 <th scope="row">Status</th>
-                                @if ($property->status == 1)
+                                @if ($property->status == 0)
                                     <td><span style="background: rgb(38, 0, 255);color: white;"class="badge badge-primary">In-stock</span> </td>
                                 @elseif($property->status == 3)
                                     <td><span style="background: red;color: white;"

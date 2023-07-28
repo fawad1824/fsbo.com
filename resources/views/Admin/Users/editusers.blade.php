@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label for="">Email</label>
-                    <input type="email" required name="email" id="email"  value="{{ $user->email }}"
+                    <input type="email" required name="email" id="email" value="{{ $user->email }}"
                         class="form-control
                         @error('email') is-invalid @enderror"
                         value="{{ old('email') }}" autocomplete="email" autofocus>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group">
                     <label for="">phone</label>
-                    <input type="number" name="phone" id="phone"  value="{{ $user->phone }}"
+                    <input type="number" name="phone" id="phone" value="{{ $user->phone }}"
                         class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" required
                         autocomplete="phone" autofocus>
                     @error('phone')
@@ -50,7 +50,7 @@
                 </div>
                 <div class="form-group">
                     <label for="">Password</label>
-                    <input type="password"  name="password" id="password"
+                    <input type="password" name="password" id="password"
                         class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}"
                         autocomplete="password" autofocus>
                     @error('password')
@@ -61,7 +61,7 @@
                 </div>
                 <div class="form-group">
                     <label for="">Address</label>
-                    <input type="text" name="address" id="address"  value="{{ $user->address }}"
+                    <input type="text" name="address" id="address" value="{{ $user->address }}"
                         class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}" required
                         autocomplete="address" autofocus>
                     @error('address')
@@ -70,35 +70,39 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label for="">Select Role</label>
-                    <select name="role_id" id="role_id" required value="{{ old('role_id') }}"
-                        class="form-control @error('role_id') is-invalid @enderror">
-                        <option value="2">Agent</option>
-                        <option value="3">Dealer</option>
-                        <option value="4">User</option>
-                    </select>
+                @if (Auth::user()->role_id == '1')
+                    <div class="form-group">
+                        <label for="">Select Role</label>
+                        <select name="role_id" id="role_id" required value="{{ old('role_id') }}"
+                            class="form-control @error('role_id') is-invalid @enderror">
+                            <option value="2">Agent</option>
+                            <option value="3">Dealer</option>
+                            <option value="4">User</option>
+                        </select>
 
-                    @error('role_id')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="">Status</label>
-                    <select name="status" id="status" required value="{{ old('status') }}"
-                        class="form-control @error('status') is-invalid @enderror">
-                        <option  value="1">Deactive</option>
-                        <option value="2">Active</option>
-                    </select>
+                        @error('role_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="">Status</label>
+                        <select name="status" id="status" required value="{{ old('status') }}"
+                            class="form-control @error('status') is-invalid @enderror">
+                            <option value="2">Active</option>
+                            <option value="1">Deactive</option>
 
-                    @error('status')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
+                        </select>
+
+                        @error('status')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                @endif
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
