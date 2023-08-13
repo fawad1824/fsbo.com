@@ -62,7 +62,7 @@
                                     // ->where('contactuser_id', Auth::user()->id)
                                     ->get();
                             @endphp
-                            @if (Auth::user()->role_id != '1' && $type == 'my_booking')
+                            @if ($type == 'my_booking')
                                 @foreach ($booking as $index => $item)
                                     @php
                                         $propD = DB::table('properties')
@@ -120,7 +120,7 @@
                             @endif
 
 
-                            @if (Auth::user()->role_id != '1' && $type == 'user_booking')
+                            @if ($type == 'user_booking')
                                 @foreach ($bookingAll as $index => $item)
                                     @php
                                         $propD = DB::table('properties')
@@ -178,7 +178,7 @@
                             @endif
 
 
-                            @if (Auth::user()->role_id != '1' && $type == 'my_appointment')
+                            @if ($type == 'my_appointment')
                                 @foreach ($bookingApp as $index => $item)
                                     @php
                                         $propD = DB::table('properties')
@@ -236,7 +236,7 @@
                             @endif
 
 
-                            @if (Auth::user()->role_id != '1' && $type == 'users_appointment')
+                            @if ($type == 'users_appointment')
                                 @foreach ($bookingAppAll as $index => $item)
                                     @php
                                         $propD = DB::table('properties')
@@ -271,14 +271,13 @@
                                             @endif
                                         </td>
                                         <td class="d-flex">
-                                            @if ($type == 'user_booking')
-                                                @if ($item->status != '3' && Auth::user()->role_id != '1')
-                                                    <button style="margin: 4px;" class="btn btn-sm btn-primary">
-                                                        <i class="fa fa-book"
-                                                            onclick="addBooking({{ $item->id }},{{ $item->contactuser_id }})"
-                                                            aria-hidden="true"></i>
-                                                    </button>
-                                                @endif
+                                            @if (Auth::user()->role_id = '1')
+                                            @elseif($item->role_id == '3')
+                                                <button style="margin: 4px;" class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-book"
+                                                        onclick="addBooking({{ $item->id }},{{ $item->contactuser_id }})"
+                                                        aria-hidden="true"></i>
+                                                </button>
                                             @endif
 
                                             <form method="POST" action="{{ url('/bookingdelete/' . $item->id) }}">

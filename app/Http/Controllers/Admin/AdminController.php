@@ -9,8 +9,10 @@ use App\Models\Admin\properties;
 use App\Models\Admin\propertieskind;
 use App\Models\Admin\Sectors;
 use App\Models\LikeProperty;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use PDO;
 
 class AdminController extends Controller
@@ -120,7 +122,14 @@ class AdminController extends Controller
     }
     public function myBookingdelete($id)
     {
+        $bookingUser = BookingApp::find($id);
+        $user = User::where('id', $bookingUser->user_id)->first();
         BookingApp::find($id)->delete();
+        if ($bookingUser->booking_id == '1') {
+            $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Booking has Been Deleted', " " . "FBSO Team");
+        } else if ($bookingUser->appointment_id == '1') {
+            $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Appointment has Been Deleted', " " . "FBSO Team");
+        }
         return redirect()->back()->with('success', 'Booking Deleted successfully.');
     }
     public function Bookingstatus(Request $request)
@@ -139,14 +148,26 @@ class AdminController extends Controller
     {
         $title = "Like Propety";
         $title1 = "Home";
-        $property = LikeProperty::join('properties', 'likeproperty.property_id', 'properties.id')->select('*')->where('is_like', '1')->get();
+        $property = LikeProperty::join('properties', 'likeproperty.property_id', 'properties.id')->where('likeproperty.user_id', Auth::user()->id)->select('*')->where('is_like', '1')->get();
         return view('Admin.Property.Like', compact('title', 'title1', 'property'));
     }
     public function propertyApproved(Request $request)
     {
-        $prop=properties::where('id',$request->pID)->first();
-        $prop->status=$request->status;
+        $prop = properties::where('id', $request->pID)->first();
+        $prop->status = $request->status;
         $prop->save();
         return redirect()->back()->with('success', 'Property Approved.');
+    }
+    public function sendEmail($user, $message, $subj)
+    {
+        $to = $user->email;
+        try {
+            return Mail::raw($message, function ($message) use ($to, $subj) {
+                $message->to($to)
+                    ->subject($subj);
+            });
+        } catch (\Exception $e) {
+            return $e;
+        }
     }
 }

@@ -75,9 +75,19 @@
                         <label for="">Select Role</label>
                         <select name="role_id" id="role_id" required value="{{ old('role_id') }}"
                             class="form-control @error('role_id') is-invalid @enderror">
-                            <option value="2">Agent</option>
-                            <option value="3">Dealer</option>
-                            <option value="4">User</option>
+                            @if ($user->role_id == 2)
+                                <option value="2">Agent</option>
+                                <option value="3">Dealer</option>
+                                <option value="4">User</option>
+                            @elseif($user->role_id == 3)
+                                <option value="2">Agent</option>
+                                <option selected value="3">Dealer</option>
+                                <option value="4">User</option>
+                            @elseif($user->role_id == 4)
+                                <option value="2">Agent</option>
+                                <option value="3">Dealer</option>
+                                <option selected value="4">User</option>
+                            @endif
                         </select>
 
                         @error('role_id')
@@ -90,8 +100,13 @@
                         <label for="">Status</label>
                         <select name="status" id="status" required value="{{ old('status') }}"
                             class="form-control @error('status') is-invalid @enderror">
-                            <option value="2">Active</option>
-                            <option value="1">Deactive</option>
+                            @if ($user->status == 2)
+                                <option value="1">Deactive</option>
+                                <option selected value="2">Active</option>
+                            @else
+                                <option selected value="2">Active</option>
+                                <option value="1">Deactive</option>
+                            @endif
 
                         </select>
 
@@ -104,7 +119,7 @@
                 @endif
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">Updatd</button>
                 </div>
             </form>
         </div>

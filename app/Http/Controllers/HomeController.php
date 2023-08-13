@@ -6,6 +6,7 @@ use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -80,6 +81,7 @@ class HomeController extends Controller
     {
         $title = "Users Create";
         $title1 = "Users";
+
         return view('Admin.Users.createusers', compact('title', 'title1'));
     }
     public function addCreateUser(Request $data)
@@ -92,10 +94,15 @@ class HomeController extends Controller
                 $user->password = Hash::make($data['password']);
             }
             $user->role_id = $data['role_id'];
-            $user->status = '1';
+            $user->status = $data->status;
             $user->phone = $data['phone'];
             $user->address = $data['address'];
             $user->save();
+            if ($data->status == "1") {
+                $this->sendEmail($user, "Hi " . $user->name . " ! "  . "Deactivated Your Account", "FBSO Updated Your Account");
+            } else if ($data->status) {
+                $this->sendEmail($user, "Hi " . $user->name . " ! "  . "Activated Your Account", "FBSO Updated Your Account");
+            }
             return redirect()->back()->with('success', 'User Updated successfully.');
         }
         $user = User::create([
@@ -103,22 +110,40 @@ class HomeController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role_id' => $data['role_id'],
-            'status' => '1',
+            'status' => $data->status,
             'phone' => $data['phone'],
             'address' => $data['address'],
         ]);
+        if ($data->status == "1") {
+            $this->sendEmail($user, "Hi " . $user->name . " ! "  . "Your Account Has been created and you account status is deactivated", "FBSO Team");
+        } else if ($data->status) {
+            $this->sendEmail($user, "Hi " . $user->name . " ! "  . "Your Account Has been created and you account status is activated", "FBSO Team");
+        }
         return redirect()->back()->with('success', 'User Added successfully.');
     }
     public function userscontact()
     {
-        $user=Contact::all();
+        $user = Contact::all();
         $title = "Users Create";
         $title1 = "Users";
-        return  view('Admin.contact.users',compact('user','title','title1'));
+        return  view('Admin.contact.users', compact('user', 'title', 'title1'));
     }
     public function usersuserscontact($id)
     {
         Contact::find($id)->delete();
         return redirect()->back()->with('success', 'Contact Deleted successfully.');
+    }
+
+    public function sendEmail($user, $message, $subj)
+    {
+        $to = $user->email;
+        try {
+            return Mail::raw($message, function ($message) use ($to, $subj) {
+                $message->to($to)
+                    ->subject($subj);
+            });
+        } catch (\Exception $e) {
+            return $e;
+        }
     }
 }

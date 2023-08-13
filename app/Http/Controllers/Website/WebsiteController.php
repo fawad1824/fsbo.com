@@ -11,6 +11,7 @@ use App\Models\LikeProperty;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class WebsiteController extends Controller
 {
@@ -75,9 +76,12 @@ class WebsiteController extends Controller
 
     public function usersBooking(Request $request)
     {
+        $propertyName = properties::where('id', $request->pid)->first();
+        $curUser = User::where('email', $request->email)->first();
+        $proUser = User::where('id', $propertyName->user_id)->first();
+
         $booking = new BookingApp();
         $booking->property_id = $request->pid;
-        $propertyName = properties::where('id', $request->pid)->first();
         $booking->user_id = Auth::user()->id;
         $booking->booking_id = '1';
         $booking->contactuser_id = $propertyName->user_id;
@@ -89,12 +93,19 @@ class WebsiteController extends Controller
         $booking->status = '1';
         $booking->desciption = $request->description;
         $booking->save();
+
+        $this->sendEmail($curUser, "Hi " . $curUser->name . " ! "  . 'Your Booking has Been Added', " " . "FBSO Team");
+        $this->sendEmail($proUser, "Hi " . $proUser->name . " ! "  . 'You Have Recieved new Booking', " " . "FBSO Team");
+
         return redirect()->back()->with('success', 'Booking Added successfully.');
     }
     public function usersAppointment(Request $request)
     {
-        $booking = new BookingApp();
         $propertyName = properties::where('id', $request->pid)->first();
+        $curUser = User::where('email', $request->email)->first();
+        $proUser = User::where('id', $propertyName->user_id)->first();
+
+        $booking = new BookingApp();
         $booking->property_id = $request->pid;
         $booking->user_id = Auth::user()->id;
         $booking->appointment_id = '1';
@@ -107,6 +118,10 @@ class WebsiteController extends Controller
         $booking->status = '1';
         $booking->desciption = $request->description;
         $booking->save();
+
+        $this->sendEmail($curUser, "Hi " . $curUser->name . " ! "  . 'Your Appointment has Been Added', " " . "FBSO Team");
+        $this->sendEmail($proUser, "Hi " . $proUser->name . " ! "  . 'You Have Recieved new Appointment', " " . "FBSO Team");
+
         return redirect()->back()->with('success', 'Booking Added successfully.');
     }
     public function usersLikeP(Request $request, $id)
@@ -128,5 +143,20 @@ class WebsiteController extends Controller
             $likep->save();
         }
         return redirect()->back()->with('success', 'Liked successfully.');
+    }
+
+
+
+    public function sendEmail($user, $message, $subj)
+    {
+        $to = $user->email;
+        try {
+            return Mail::raw($message, function ($message) use ($to, $subj) {
+                $message->to($to)
+                    ->subject($subj);
+            });
+        } catch (\Exception $e) {
+            return $e;
+        }
     }
 }

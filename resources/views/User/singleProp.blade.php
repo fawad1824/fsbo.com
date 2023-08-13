@@ -173,10 +173,12 @@
                             <tr>
                                 <th scope="row">Status</th>
                                 @if ($property->status == 0)
-                                    <td><span style="background: rgb(38, 0, 255);color: white;"class="badge badge-primary">In-stock</span> </td>
+                                    <td><span
+                                            style="background: rgb(38, 0, 255);color: white;"class="badge badge-primary">In-stock</span>
+                                    </td>
                                 @elseif($property->status == 3)
-                                    <td><span style="background: red;color: white;"
-                                            class="badge badge-danger">Sold</span></td>
+                                    <td><span style="background: red;color: white;" class="badge badge-danger">Sold</span>
+                                    </td>
                                 @endif
                             </tr>
                         </tbody>
@@ -226,6 +228,10 @@
                                         <i class="fa fa-calendar-alt me-2 "></i>Get Appoinment
                                     </button>
                                 @endif
+                                <a href="{{ url('Chat') }}" class="btn btn-dark py-3 px-4 me-2 pl-2">
+                                    <i class="fa fa-commenting "></i>
+                                </a>
+
                             @else
                                 <p style="margin: 17px 19px;">Your are Not Already Login</p>
                                 <a href="{{ url('login') }}" class="btn btn-primary py-3 px-4 me-2 pl-2">Go to Login</a>
@@ -316,7 +322,7 @@
     <!-- Property List End -->
 
 
-    <!-- Modal -->
+    <!-- Booking -->
     <div class="modal fade  bd-example-modal-lg" id="exampleModalCenter" tabindex="1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -336,14 +342,16 @@
                                     <label for="">Email</label>
                                     <input type="text" hidden class="form-control" name="pid"
                                         value="{{ $property->id }}" id="pid" required>
-                                    <input type="email" class="form-control" name="email" id="email" required>
+                                    <input type="email" readonly value="{{ Auth::user()->email }}"
+                                        class="form-control" name="email" id="email" required>
                                 </div>
                             </div>
 
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="">Phone</label>
-                                    <input type="number" class="form-control" name="phone" id="phone" required>
+                                    <input type="number" readonly value="{{ Auth::user()->phone }}"
+                                        class="form-control" name="phone" id="phone" required>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -351,12 +359,6 @@
                                     <label for="">Date</label>
                                     <input type="date" value="{{ date('m-d-Y') }}" class="form-control"
                                         name="date" id="date" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="">Time</label>
-                                    <input type="time" class="form-control" name="time" id="time" required>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -382,7 +384,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Appointment -->
     <div class="modal fade  bd-example-modal-lg" id="exampleModalCenter2" tabindex="1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -402,14 +404,16 @@
                                     <label for="">Email</label>
                                     <input type="text" hidden class="form-control" name="pid"
                                         value="{{ $property->id }}" id="pid" required>
-                                    <input type="email" class="form-control" name="email" id="email" required>
+                                    <input type="email" readonly value="{{ Auth::user()->email }}"
+                                        class="form-control" name="email" id="email" required>
                                 </div>
                             </div>
 
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="">Phone</label>
-                                    <input type="number" class="form-control" name="phone" id="phone" required>
+                                    <input type="number" readonly value="{{ Auth::user()->phone }}"
+                                        class="form-control" name="phone" id="phone" required>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -423,6 +427,12 @@
                                 <div class="form-group">
                                     <label for="">Time</label>
                                     <input type="time" class="form-control" name="time" id="time" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">Price</label>
+                                    <input type="number" class="form-control" name="price" id="price" required>
                                 </div>
                             </div>
                             <div class="col-lg-12">
