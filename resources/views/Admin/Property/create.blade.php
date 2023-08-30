@@ -97,14 +97,27 @@
         </div>
 
 
-        <div class="form-group">
-            <label style="width: 100%" for="">Please select your Sector?</label>
-            <select name="sectors" required style="width: 100%" id="sectors" class="form-control sectors">
-                @foreach ($propertysector as $item)
-                    <option value="{{ $item->id }}">{{ $item->sectors }}</option>
-                @endforeach
-            </select>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label style="width: 100%" for="">Please select your Sector?</label>
+                    <select name="sectors" required style="width: 100%" id="sectors" class="form-control sectors">
+                        @foreach ($propertysector as $item)
+                            <option value="{{ $item->id }}">{{ $item->sectors }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div class="form-group">
+                    <label style="width: 100%" for="">Featured</label>
+                    <input type="checkbox" class="form-control" name="feature">
+                </div>
+            </div>
         </div>
+
+
 
         <div class="form-group">
             <div class="row">

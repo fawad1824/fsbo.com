@@ -31,7 +31,17 @@
                                     <td> <img style="width: 45px;" src="{{ '/images/' . $item->avatar }}" alt="">
                                     </td>
                                     <td> {{ $item->name }}</td>
-                                    <td> Admin</td>
+                                    <td>
+                                        @if ($item->role_id == '3')
+                                            Dealer
+                                        @elseif ($item->role_id == '1')
+                                            Admin
+                                        @elseif ($item->role_id == '2')
+                                            Agent
+                                        @elseif ($item->role_id == '4')
+                                            Customer
+                                        @endif
+                                    </td>
                                     <td> {{ $item->address }}</td>
                                     <td> {{ $item->email }}</td>
                                     <td> {{ $item->phone }}</td>

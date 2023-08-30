@@ -58,7 +58,7 @@
 
                     <div class="row g-4 ">
                         @foreach ($property as $item)
-                            @if ($item->feature == '1')
+                            @if ($item->feature == 'on')
                                 @php
                                     $Ptype = DB::table('propertieskinds')
                                         ->where('id', $item->ptype)

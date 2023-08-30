@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin\properties;
 use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,7 +30,15 @@ class HomeController extends Controller
     {
         $title = "Dashboard";
         $title1 = "Home";
-        return view('home', compact('title', 'title1'));
+        $propertyISell = properties::where('type', 'sell')->count();
+        $propertyIRent = properties::where('type', 'rent')->count();
+
+        return view('home', compact(
+            'title',
+            'title1',
+            'propertyISell',
+            'propertyIRent'
+        ));
     }
     public function propertyRent()
     {
@@ -60,7 +69,7 @@ class HomeController extends Controller
     {
         $title = "Dealers";
         $title1 = "Home";
-        $user = User::where('role_id', '1')->get();
+        $user = User::where('role_id', '3')->get();
         return view('Admin.Users.dealer', compact('title', 'title1', 'user'));
     }
 

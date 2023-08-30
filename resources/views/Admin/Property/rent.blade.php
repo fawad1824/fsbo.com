@@ -47,36 +47,30 @@
                                             <td><span class="badge badge-primary">Stock</span></td>
                                         @elseif($item->status == '3')
                                             <td> <span class="badge badge-danger">Sold</span></td>
-                                        @elseif($item->status == '10')
-                                            <td> <span class="badge badge-primary">Pending</span></td>
                                         @elseif($item->status == '2')
                                             <td> <span class="badge badge-danger">Not Approved</span></td>
                                         @endif
                                         <td class="d-flex">
                                             @if (Auth::user()->role_id == '1')
-                                                <button style="margin: 4px;" class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-book"
-                                                        onclick="addBooking({{ $item->id }})"
-                                                        aria-hidden="true"></i>
-                                                </button>
+                                                @if ($item->status != '0')
+                                                    <button style="margin: 4px;" class="btn btn-sm btn-primary">
+                                                        <i class="fa fa-book" onclick="addBooking({{ $item->id }})"
+                                                            aria-hidden="true"></i>
+                                                    </button>
+                                                @endif
                                             @endif
                                             @if ($item->status != '3' && Auth::user()->role_id != '1')
                                                 <a href="{{ url('propertyedit/' . $item->id) }}"
                                                     style="margin-top: 4px;height: 32px;" class="btn btn-sm btn-primary"><i
                                                         class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                             @endif
-                                            @if (Auth::user()->role_id != '1')
-                                                <form method="POST" action="{{ url('propertydelete/' . $item->id) }}">
-                                                    @csrf
-                                                    <input name="_method" type="hidden" value="DELETE">
-                                                    <button style="margin: 4px;" type="submit"
-                                                        class="btn btn-sm btn-primary  show_confirm" data-toggle="tooltip"
-                                                        title='Delete'><i class="fa fa-trash"
-                                                            aria-hidden="true"></i></button>
-                                                </form>
-                                            @endif
-
-
+                                            <form method="POST" action="{{ url('propertydelete/' . $item->id) }}">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <button style="margin: 4px;" type="submit"
+                                                    class="btn btn-sm btn-primary  show_confirm" data-toggle="tooltip"
+                                                    title='Delete'><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endif

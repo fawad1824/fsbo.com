@@ -20,6 +20,7 @@ class WebsiteController extends Controller
         $propetyType = propertytype::all();
         $property = properties::select('properties.*')->where('status', '=', '0')->paginate(9);
         $userTeam = User::where('role_id', '3')->paginate('8');
+
         return view('User.index', compact('propetyType', 'userTeam', 'property'));
     }
     public function about()

@@ -228,7 +228,7 @@
                                         <i class="fa fa-calendar-alt me-2 "></i>Get Appoinment
                                     </button>
                                 @endif
-                                <a href="{{ url('Chat') }}" class="btn btn-dark py-3 px-4 me-2 pl-2">
+                                <a href="{{ url('Chat').'/'.$property->user_id }}" class="btn btn-dark py-3 px-4 me-2 pl-2">
                                     <i class="fa fa-commenting "></i>
                                 </a>
 
@@ -342,7 +342,7 @@
                                     <label for="">Email</label>
                                     <input type="text" hidden class="form-control" name="pid"
                                         value="{{ $property->id }}" id="pid" required>
-                                    <input type="email" readonly value="{{ Auth::user()->email }}"
+                                    <input type="email" readonly value="@if ( isset(Auth::user()->email)){{  Auth::user()->email }}@endif"
                                         class="form-control" name="email" id="email" required>
                                 </div>
                             </div>
@@ -350,7 +350,7 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="">Phone</label>
-                                    <input type="number" readonly value="{{ Auth::user()->phone }}"
+                                    <input type="number" readonly value="@if (isset(Auth::user()->phone)){{  Auth::user()->phone}}@endif"
                                         class="form-control" name="phone" id="phone" required>
                                 </div>
                             </div>
@@ -404,7 +404,7 @@
                                     <label for="">Email</label>
                                     <input type="text" hidden class="form-control" name="pid"
                                         value="{{ $property->id }}" id="pid" required>
-                                    <input type="email" readonly value="{{ Auth::user()->email }}"
+                                    <input type="email" readonly value="@if(isset(Auth::user()->email)){{ Auth::user()->email }}@endif"
                                         class="form-control" name="email" id="email" required>
                                 </div>
                             </div>
@@ -412,7 +412,7 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="">Phone</label>
-                                    <input type="number" readonly value="{{ Auth::user()->phone }}"
+                                    <input type="number" readonly value="@if (isset(Auth::user()->phone)){{  Auth::user()->phone}}@endif"
                                         class="form-control" name="phone" id="phone" required>
                                 </div>
                             </div>

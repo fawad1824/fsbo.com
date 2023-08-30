@@ -77,7 +77,7 @@
 
     <!-- Search Start -->
 
-    <div class="container-fluid bg-primary mb-5 wow fadeIn " data-wow-delay="0.1s " style="padding: 35px; ">
+    <div class="container-fluid bg-primary mb-5 wow fadeIn " style="padding: 35px; ">
         <div class="container ">
             <div class="row g-2 ">
                 <div class="col-md-10 ">
@@ -140,7 +140,7 @@
     <div class="container-xxl py-5 ">
         <div class="container ">
             <div class="row g-5 align-items-center ">
-                <div class="col-lg-6 wow fadeIn " data-wow-delay="0.1s ">
+                <div class="col-lg-6 wow fadeIn ">
                     <div class="about-img position-relative overflow-hidden p-5 pe-0 ">
                         <img class="img-fluid w-100 " src="{{ asset('user/img/about.jpg') }} ">
                     </div>
@@ -165,11 +165,11 @@
         <div class="container ">
             <div class="row g-0 gx-5 align-items-end ">
                 <div class="col-lg-6 ">
-                    <div class="text-start mx-auto mb-5 wow slideInLeft " data-wow-delay="0.1s ">
+                    <div class="text-start mx-auto mb-5 wow slideInLeft ">
                         <h1 class="mb-3 ">Properties</h1>
                     </div>
                 </div>
-                <div class="col-lg-6 text-start text-lg-end wow slideInRight " data-wow-delay="0.1s ">
+                <div class="col-lg-6 text-start text-lg-end wow slideInRight ">
                     <ul class="nav nav-pills d-inline-flex justify-content-end mb-5 " id="pills-tab" role="tablist">
                         <li class="nav-item me-2 ">
                             <button class="btn btn-outline-primary active" id="pills-home-tab" data-bs-toggle="pill"
@@ -204,7 +204,7 @@
                                         ->first();
                                     $money = $item->price;
                                 @endphp
-                                <div class="col-lg-4 col-md-6 wow fadeInUp " data-wow-delay="0.1s ">
+                                <div class="col-lg-4 col-md-6 wow fadeInUp ">
                                     <a href="{{ url('propertyView/' . $item->id) }}">
                                         <div class="property-item rounded overflow-hidden ">
                                             <div class="position-relative overflow-hidden ">
@@ -260,7 +260,7 @@
                                         ->first();
                                     $money = $item->price;
                                 @endphp
-                                <div class="col-lg-4 col-md-6 wow fadeInUp " data-wow-delay="0.1s ">
+                                <div class="col-lg-4 col-md-6 wow fadeInUp ">
                                     <a href="{{ url('propertyView/' . $item->id) }}">
                                         <div class="property-item rounded overflow-hidden ">
                                             <div class="position-relative overflow-hidden ">
@@ -316,7 +316,7 @@
                                         ->first();
                                     $money = $item->price;
                                 @endphp
-                                <div class="col-lg-4 col-md-6 wow fadeInUp " data-wow-delay="0.1s ">
+                                <div class="col-lg-4 col-md-6 wow fadeInUp ">
                                     <a href="{{ url('propertyView/' . $item->id) }}">
                                         <div class="property-item rounded overflow-hidden ">
                                             <div class="position-relative overflow-hidden ">
@@ -370,7 +370,7 @@
             <div class="bg-light rounded p-3 ">
                 <div class="bg-white rounded p-4 " style="border: 1px dashed rgba(0, 185, 142, .3) ">
                     <div class="row g-5 align-items-center ">
-                        <div class="col-lg-6 wow fadeIn " data-wow-delay="0.1s ">
+                        <div class="col-lg-6 wow fadeIn ">
                             <img class="img-fluid rounded w-100 " src="{{ asset('user/img/call-to-action.jpg') }} "
                                 alt=" ">
                         </div>
@@ -399,13 +399,13 @@
     <!-- Team Start -->
     <div class="container-xxl py-5 ">
         <div class="container ">
-            <div class="text-center mx-auto mb-5 wow fadeInUp " data-wow-delay="0.1s " style="max-width: 600px; ">
+            <div class="text-center mx-auto mb-5 wow fadeInUp " style="max-width: 600px; ">
                 <h1 class="mb-3 ">Popular Property Dealers</h1>
             </div>
             <div class="row g-4 ">
 
                 @foreach ($userTeam as $item)
-                    <div class="col-lg-3 col-md-6 wow fadeInUp " data-wow-delay="0.1s ">
+                    <div class="col-lg-3 col-md-6 wow fadeInUp ">
                         <div class="team-item rounded overflow-hidden ">
                             <div class="position-relative ">
                                 <img class="img-fluid " src="{{ asset('storage/users-avatar/' . $item->avatar) }} "
@@ -436,10 +436,10 @@
     <!-- Testimonial Start -->
     <div class="container-xxl py-5 ">
         <div class="container ">
-            <div class="text-center mx-auto mb-5 wow fadeInUp " data-wow-delay="0.1s " style="max-width: 600px; ">
+            <div class="text-center mx-auto mb-5 wow fadeInUp " style="max-width: 600px; ">
                 <h1 class="mb-3 ">Our Clients Say!</h1>
             </div>
-            <div class="owl-carousel testimonial-carousel wow fadeInUp " data-wow-delay="0.1s ">
+            <div class="owl-carousel testimonial-carousel wow fadeInUp ">
                 <div class="testimonial-item bg-light rounded p-3 ">
                     <div class="bg-white border rounded p-4 ">
                         <p>Very user friendly. Makes it easy to manage all the tasks that come with real estate agencies.

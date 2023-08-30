@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('user_id');
             $table->string('contactuser_id');
             $table->string('date');
-            $table->string('time');
+            $table->string('time')->nullable();
             $table->string('price');
             $table->string('phone');
             $table->string('email');

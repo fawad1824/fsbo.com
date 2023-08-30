@@ -49,7 +49,7 @@
                                         <td> <span class="badge badge-primary">Not Approved</span></td>
                                     @endif
                                     <td class="d-flex">
-                                        @if ($item->status != '3')
+                                        @if ($item->status != '3'&& $item->status == '10')
                                             <a href="{{ url('propertyedit/' . $item->id) }}"
                                                 style="margin-top: 4px;height: 32px;" class="btn btn-sm btn-primary"><i
                                                     class="fa fa-pencil-square-o" aria-hidden="true"></i></a>

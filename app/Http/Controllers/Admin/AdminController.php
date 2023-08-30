@@ -49,6 +49,9 @@ class AdminController extends Controller
         $property->user_id = Auth::user()->id;
         $property->status = '10';
         $property->sectors = $request->sectors;
+        if ($request->feature) {
+            $property->feature = '1';
+        }
 
         if ($request->hasFile('fileinput1')) {
             $image = $request->file('fileinput1');
@@ -72,6 +75,8 @@ class AdminController extends Controller
                 }
             }
         }
+        $user = User::where('id', Auth::user()->id)->first();
+        $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Property Has Been Added wait for admin Approval Thanks!', " " . "FBSO Team");
         return redirect()->back()->with('success', 'property Added successfully.');
     }
 
@@ -142,6 +147,22 @@ class AdminController extends Controller
         }
         $book->status = $request->status;
         $book->save();
+        $user = User::where('id', $book->user_id)->first();
+        $user2 = User::where('id', $book->contactuser_id)->first();
+        $prop = properties::where('id', $book->property_id)->first();
+        if ($request->status == '0') {
+            $this->sendEmail($user2, "Hi " . $user2->name . " ! "  . 'You are Rejected this Booking ' . $prop->name, " " . "FBSO Team");
+            $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Booking ' . $prop->name . ' Has Been Rejected Thanks!', " " . "FBSO Team");
+        } else if ($request->status == '1') {
+            $this->sendEmail($user2, "Hi " . $user2->name . " ! "  . 'You are Pedning this Booking ' . $prop->name, " " . "FBSO Team");
+            $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Booking ' . $prop->name . ' Has Been Pending Thanks!', " " . "FBSO Team");
+        } else if ($request->status == '2') {
+            $this->sendEmail($user2, "Hi " . $user2->name . " ! "  . 'You are Accept Booking ' . $prop->name, " " . "FBSO Team");
+            $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Booking ' . $prop->name . ' Has Been Accept Thanks!', " " . "FBSO Team");
+        } else if ($request->status == '3') {
+            $this->sendEmail($user2, "Hi " . $user2->name2 . " ! "  . 'Your Property Have Been Sold  ' . $prop->name, " " . "FBSO Team");
+            $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Booking ' . $prop->name . ' Has Been Sold To You Thanks!', " " . "FBSO Team");
+        }
         return redirect()->back()->with('success', 'Booking Status successfully.');
     }
     public function propertyLike()
@@ -154,8 +175,15 @@ class AdminController extends Controller
     public function propertyApproved(Request $request)
     {
         $prop = properties::where('id', $request->pID)->first();
+
         $prop->status = $request->status;
         $prop->save();
+        $user = User::where('id', $prop->user_id)->first();
+        if ($request->status == '2') {
+            $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Property ' . $prop->name . ' Not Approval by Admin Thanks!', " " . "FBSO Team");
+        } else if ($request->status == '0') {
+            $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Property ' . $prop->name . ' Approval By Admin Thanks!', " " . "FBSO Team");
+        }
         return redirect()->back()->with('success', 'Property Approved.');
     }
     public function sendEmail($user, $message, $subj)

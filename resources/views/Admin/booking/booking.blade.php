@@ -271,8 +271,8 @@
                                             @endif
                                         </td>
                                         <td class="d-flex">
-                                            @if (Auth::user()->role_id = '1')
-                                            @elseif($item->role_id == '3')
+                                             {{-- @if (Auth::user()->role_id = '1') --}}
+                                            @if(Auth::user()->role_id != '1')
                                                 <button style="margin: 4px;" class="btn btn-sm btn-primary">
                                                     <i class="fa fa-book"
                                                         onclick="addBooking({{ $item->id }},{{ $item->contactuser_id }})"
@@ -440,9 +440,10 @@
                             <input type="text" hidden id="UID" name="UID" class="UID">
                             <select name="status" id="status" class="form-control">
                                 <option value="0">Rejected</option>
-                                <option value="1">Pending</option>
                                 <option value="2">Accept</option>
+                                @if ($type=='user_booking')
                                 <option value="3">Sold</option>
+                                @endif
                             </select>
                         </div>
                     </div>
