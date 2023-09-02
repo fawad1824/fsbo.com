@@ -201,6 +201,20 @@ class AdminController extends Controller
         }
         return redirect()->back()->with('success', 'Dealer Approved.');
     }
+
+    public function dealerverification(){
+        $title='';
+        $title1='';
+        return view('verification.dealer',compact('title','title1'));
+    }
+    public function propertyverification(){
+        $title='';
+        $title1='';
+        return view('verification.property',compact('title','title1'));
+    }
+
+//     dealerverification
+// propertyverification
     public function sendEmail($user, $message, $subj)
     {
         $to = $user->email;

@@ -126,15 +126,33 @@
 
                         {{-- Admin --}}
                         @if (Auth::user()->role_id == '1')
-                            <li class="nav-item">
-                                <a href="/booking/user_booking"
-                                    class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-book"></i>
-                                    <p>
-                                        Users Bookings
-                                    </p>
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a href="/dealerverification"
+                                class="nav-link {{ Route::is('dealerverification') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Dealer Verfication
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/propertyverification"
+                                class="nav-link {{ Route::is('propertyverification') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Property Verfication
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/booking/user_booking"
+                                class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Users Bookings
+                                </p>
+                            </a>
+                        </li>
                             <li class="nav-item">
                                 <a href="/booking/users_appointment"
                                     class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">

@@ -59,6 +59,9 @@ Route::get('/booking/{type}', [AdminController::class, 'myBooking'])->name('myBo
 Route::delete('/bookingdelete/{id}', [AdminController::class, 'myBookingdelete'])->name('myBookingdelete');
 Route::post('/Bookingstatus', [AdminController::class, 'Bookingstatus'])->name('Bookingstatus');
 
+Route::get('/dealerverification', [AdminController::class, 'dealerverification'])->name('dealerverification');
+Route::get('/propertyverification', [AdminController::class, 'propertyverification'])->name('propertyverification');
+
 
 // User Route
 Route::get('/', [WebsiteController::class, 'index'])->name('home.index');
