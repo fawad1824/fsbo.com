@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('users_id');
             $table->string('agent_id');
-            $table->string('is_users');
-            $table->string('is_properties');
+            $table->string('is_users')->nullable();
+            $table->string('is_properties')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -13,6 +13,7 @@ class assignProp extends Model
         'users_id',
         'agent_id',
         'is_users',
+        'status',
         'is_properties',
     ];
 }

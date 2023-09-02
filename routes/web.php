@@ -61,6 +61,10 @@ Route::post('/Bookingstatus', [AdminController::class, 'Bookingstatus'])->name('
 
 Route::get('/dealerverification', [AdminController::class, 'dealerverification'])->name('dealerverification');
 Route::get('/propertyverification', [AdminController::class, 'propertyverification'])->name('propertyverification');
+Route::delete('/propertyverificationDeleted/{id}', [AdminController::class, 'propertyverificationDeleted'])->name('propertyverificationDeleted');
+
+Route::post('/dealerverificationAdd', [AdminController::class, 'dealerverificationAdd'])->name('dealerverificationAdd');
+Route::post('/propertyverificationAdd', [AdminController::class, 'propertyverificationAdd'])->name('propertyverificationAdd');
 
 
 // User Route

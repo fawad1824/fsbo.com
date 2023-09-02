@@ -8,10 +8,12 @@ use App\Models\Admin\Galleries;
 use App\Models\Admin\properties;
 use App\Models\Admin\propertieskind;
 use App\Models\Admin\Sectors;
+use App\Models\assignProp;
 use App\Models\LikeProperty;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use PDO;
@@ -175,46 +177,97 @@ class AdminController extends Controller
     }
     public function propertyApproved(Request $request)
     {
-        $prop = properties::where('id', $request->pID)->first();
-
-        $prop->status = $request->status;
-        $prop->save();
-        $user = User::where('id', $prop->user_id)->first();
-        if ($request->status == '2') {
-            $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Property ' . $prop->name . ' Not Approval by Admin Thanks!', " " . "FBSO Team");
-        } else if ($request->status == '0') {
-            $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Property ' . $prop->name . ' Approval By Admin Thanks!', " " . "FBSO Team");
+        if ($request->pID) {
+            $prop = assignProp::where('id', $request->pID)->first();
+            $prop->status = $request->status;
+            $prop->save();
         }
+        if ($request->userID) {
+            $prop1 = DB::table('properties')->where('id', $request->userID)->update([
+                'status'=>$request->status,
+            ]);
+            // $prop1->status = $request->status;
+            // $prop1->save();
+        }
+        // $user = User::where('id', $prop->user_id)->first();
+        // if ($request->status == '2') {
+        //     $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Property ' . $prop->name . ' Not Approval by Admin Thanks!', " " . "FBSO Team");
+        // } else if ($request->status == '0') {
+        //     $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Property ' . $prop->name . ' Approval By Admin Thanks!', " " . "FBSO Team");
+        // }
         return redirect()->back()->with('success', 'Property Approved.');
     }
 
     public function usersApproved(Request $request)
     {
-        $prop = User::where('id', $request->pID)->first();
-        $prop->status = $request->status;
-        $prop->save();
-        $user = User::where('id', $prop->user_id)->first();
-        if ($request->status == '2') {
-            $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Property ' . $prop->name . ' Not Approval by Admin Thanks!', " " . "FBSO Team");
-        } else if ($request->status == '0') {
-            $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Property ' . $prop->name . ' Approval By Admin Thanks!', " " . "FBSO Team");
+        if ($request->userID) {
+            $prop = User::where('id', $request->userID)->first();
+            $prop->status = $request->status;
+            $prop->save();
         }
-        return redirect()->back()->with('success', 'Dealer Approved.');
+
+        if ($request->pID) {
+            $propA = assignProp::where('id', $request->pID)->first();
+            $propA->status = $request->status;
+            $propA->save();
+        }
+
+
+        // $user = User::where('id', $prop->user_id)->first();
+        // if ($request->status == '2') {
+        //     $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Property ' . $prop->name . ' Not Approval by Admin Thanks!', " " . "FBSO Team");
+        // } else if ($request->status == '0') {
+        //     $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Property ' . $prop->name . ' Approval By Admin Thanks!', " " . "FBSO Team");
+        // }
+        return redirect()->back()->with('success', 'Dealer status Added.');
     }
 
-    public function dealerverification(){
-        $title='';
-        $title1='';
-        return view('verification.dealer',compact('title','title1'));
+    public function dealerverification()
+    {
+        $title = 'Dealer Verification';
+        $title1 = 'Home';
+        $users = User::where('status', '1')->where('role_id', '3')->get();
+        $agent = User::where('role_id', '2')->get();
+        $userPending = assignProp::where('status', '1')->where('is_users', '1')->get();
+        return view('verification.dealer', compact('title', 'title1', 'users', 'agent', 'userPending'));
     }
-    public function propertyverification(){
-        $title='';
-        $title1='';
-        return view('verification.property',compact('title','title1'));
+    public function propertyverificationDeleted($id)
+    {
+        assignProp::where('id', $id)->delete();
+        return redirect()->back()->with('success', 'Deleted successfully.');
+    }
+    public function propertyverification()
+    {
+        $title = 'Property Verification';
+        $title1 = 'Home';
+        $users = properties::where('status', '10')->get();
+        $agent = User::where('role_id', '2')->get();
+        $userPending = assignProp::where('status', '1')->where('is_properties', '1')->get();
+        return view('verification.property', compact('title', 'title1', 'users', 'agent', 'userPending'));
     }
 
-//     dealerverification
-// propertyverification
+    public function dealerverificationAdd(Request $request)
+    {
+        $use = new assignProp();
+        $use->users_id = $request->dealername;
+        $use->agent_id = $request->agentname;
+        $use->is_users = '1';
+        $use->status = '1';
+        $use->save();
+        return redirect()->back()->with('success', 'Dealer add for verification.');
+    }
+    public function propertyverificationAdd(Request $request)
+    {
+        $use = new assignProp();
+        $use->users_id = $request->dealername;
+        $use->agent_id = $request->agentname;
+        $use->is_properties = '1';
+        $use->status = '1';
+        $use->save();
+        return redirect()->back()->with('success', 'Property add for verification.');
+    }
+    // dealerverificationAdd
+    // propertyverificationAdd
     public function sendEmail($user, $message, $subj)
     {
         $to = $user->email;

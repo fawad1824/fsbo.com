@@ -53,7 +53,7 @@
                                     <td class="d-flex">
                                         @if ($item->status != '2')
                                             <button style="margin: 4px;" class="btn btn-sm btn-primary">
-                                                <i class="fa fa-book" onclick="addBooking({{ $item->id }})"
+                                                <i class="fa fa-book" onclick="addBooking({{ $item->id }},{{ $item->users_id }})"
                                                     aria-hidden="true"></i>
                                             </button>
                                         @endif
@@ -91,8 +91,9 @@
                         <div class="form-group">
                             <label for="">Property status</label>
                             <input type="text" hidden id="pID" name="pID" class="pID">
+                            <input type="text" hidden id="userID" name="userID" class="userID">
                             <select name="status" id="status" class="form-control">
-                                <option value="2">Not Approved</option>
+                                <option value="10">Not Approved</option>
                                 <option value="0">Approved</option>
                             </select>
                         </div>
@@ -108,9 +109,10 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script type="text/javascript">
-        function addBooking(itemId) {
+        function addBooking(itemId,userid) {
             $('.exampleModalCenter').modal('show');
             $('.pID').val(itemId);
+            $('.userID').val(userid);
         }
         $('.show_confirm').click(function(event) {
             var form = $(this).closest("form");

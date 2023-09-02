@@ -6,6 +6,7 @@ use App\Models\Admin\properties;
 use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -149,15 +150,15 @@ class HomeController extends Controller
         $title = "Pending Dealer";
         $title1 = "Dealer";
 
-        $user = User::where('role_id', '3')->where('status', '1')->get();
+        $user = User::join('assignprop', 'users.id', '=', 'assignprop.users_id')->select('*','assignprop.id as id')->where('agent_id', Auth::user()->id)->where('role_id', '3')->where('users.status', '1')->get();
         return view('Admin.pending.dealer', compact('title', 'title1', 'user'));
     }
     public function userspropertyapproved()
     {
         $title = "Pending Property";
         $title1 = "Property";
-        $property = properties::select('properties.*')->where('status', '1')->get();
-        return view('Admin.pending.property', compact('title', 'title1','property'));
+        $property = properties::join('assignprop', 'properties.id', '=', 'assignprop.users_id')->select('properties.*','assignprop.*','assignprop.status as status','assignprop.id as id')->where('assignprop.status', '10')->where('agent_id', Auth::user()->id)->get();
+        return view('Admin.pending.property', compact('title', 'title1', 'property'));
     }
 
 
