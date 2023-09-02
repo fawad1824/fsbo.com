@@ -4,10 +4,10 @@
         <div class="col-lg-12">
 
             <div class="card">
-                <div class="card-header">
+                {{-- <div class="card-header">
                     <h3 class="card-title">{{ $title }}</h3>
                     <a href="/addUser" class="btn btn-sm btn-primary pull-right">Add new</a>
-                </div>
+                </div> --}}
                 <!-- /.card-header -->
                 <div class="card-body">
                     @if (session('success'))

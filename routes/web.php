@@ -27,6 +27,9 @@ Route::get('/users/agent', [HomeController::class, 'usersagent'])->name('user.ag
 Route::get('/users/user', [HomeController::class, 'usersuser'])->name('users.user');
 Route::get('/users/dealer', [HomeController::class, 'usersdealer'])->name('users.dealer');
 
+Route::get('/users/dealer/approved', [HomeController::class, 'usersdealerapproved'])->name('usersdealerapproved');
+Route::get('/users/property/approved', [HomeController::class, 'userspropertyapproved'])->name('userspropertyapproved');
+
 Route::get('/addUser', [HomeController::class, 'addUser'])->name('users.add');
 Route::post('/addCreateUser', [HomeController::class, 'addCreateUser'])->name('usersCreate');
 Route::get('/edit/users/{id}', [HomeController::class, 'usersedit'])->name('users.edit.admin');
@@ -49,6 +52,7 @@ Route::delete('/propertydelete/{id}', [AdminController::class, 'ListpropertyDele
 Route::get('/propertyedit/{id}', [AdminController::class, 'Listpropertyedit'])->name('Listpropertyedit');
 Route::get('/propertyLike', [AdminController::class, 'propertyLike'])->name('propertyLike');
 Route::post('/propertyApproved', [AdminController::class, 'propertyApproved'])->name('propertyApproved');
+Route::post('/usersApproved', [AdminController::class, 'usersApproved'])->name('usersApproved');
 
 // Booking
 Route::get('/booking/{type}', [AdminController::class, 'myBooking'])->name('myBooking');

@@ -7,6 +7,7 @@ use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
@@ -133,8 +134,8 @@ class HomeController extends Controller
     public function userscontact()
     {
         $user = Contact::all();
-        $title = "Users Create";
-        $title1 = "Users";
+        $title = "Users Contact";
+        $title1 = "Dashboard";
         return  view('Admin.contact.users', compact('user', 'title', 'title1'));
     }
     public function usersuserscontact($id)
@@ -143,10 +144,29 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'Contact Deleted successfully.');
     }
 
+    public function usersdealerapproved()
+    {
+        $title = "Pending Dealer";
+        $title1 = "Dealer";
+
+        $user = User::where('role_id', '3')->where('status', '1')->get();
+        return view('Admin.pending.dealer', compact('title', 'title1', 'user'));
+    }
+    public function userspropertyapproved()
+    {
+        $title = "Pending Property";
+        $title1 = "Property";
+        $property = properties::select('properties.*')->where('status', '1')->get();
+        return view('Admin.pending.property', compact('title', 'title1','property'));
+    }
+
+
     public function sendEmail($user, $message, $subj)
     {
         $to = $user->email;
         try {
+            Log::info('Send Email' . $to);
+
             return Mail::raw($message, function ($message) use ($to, $subj) {
                 $message->to($to)
                     ->subject($subj);

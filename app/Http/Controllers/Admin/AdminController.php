@@ -12,6 +12,7 @@ use App\Models\LikeProperty;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use PDO;
 
@@ -186,10 +187,25 @@ class AdminController extends Controller
         }
         return redirect()->back()->with('success', 'Property Approved.');
     }
+
+    public function usersApproved(Request $request)
+    {
+        $prop = User::where('id', $request->pID)->first();
+        $prop->status = $request->status;
+        $prop->save();
+        $user = User::where('id', $prop->user_id)->first();
+        if ($request->status == '2') {
+            $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Property ' . $prop->name . ' Not Approval by Admin Thanks!', " " . "FBSO Team");
+        } else if ($request->status == '0') {
+            $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Property ' . $prop->name . ' Approval By Admin Thanks!', " " . "FBSO Team");
+        }
+        return redirect()->back()->with('success', 'Dealer Approved.');
+    }
     public function sendEmail($user, $message, $subj)
     {
         $to = $user->email;
         try {
+            Log::info('Send Email' . $to);
             return Mail::raw($message, function ($message) use ($to, $subj) {
                 $message->to($to)
                     ->subject($subj);

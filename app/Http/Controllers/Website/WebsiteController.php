@@ -11,6 +11,7 @@ use App\Models\LikeProperty;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class WebsiteController extends Controller
@@ -152,6 +153,7 @@ class WebsiteController extends Controller
     {
         $to = $user->email;
         try {
+            Log::info('Send Email'.$to);
             return Mail::raw($message, function ($message) use ($to, $subj) {
                 $message->to($to)
                     ->subject($subj);

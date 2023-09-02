@@ -206,6 +206,7 @@
                             </li>
                         @endif
 
+                        {{-- Customers --}}
                         @if (Auth::user()->role_id == '4')
                             <li class="nav-item">
                                 <a href="/booking/my_booking"
@@ -232,6 +233,37 @@
                                     <i class="nav-icon fa fa-heart"></i>
                                     <p>
                                         Like Properties
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if (Auth::user()->role_id == '2')
+                            <li class="nav-item">
+                                <a href="/users/property/approved"
+                                    class="nav-link {{ Route::is('userspropertyapproved') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>
+                                        Pending Properties
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/users/dealer/approved"
+                                    class="nav-link {{ Route::is('usersdealerapproved') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>
+                                        Pending Dealers
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ url('userscontact') }}"
+                                    class="nav-link {{ Route::is('userscontact') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Contacts
                                     </p>
                                 </a>
                             </li>
