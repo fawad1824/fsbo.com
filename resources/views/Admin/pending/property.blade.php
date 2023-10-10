@@ -45,7 +45,7 @@
                                         <td><span class="badge badge-primary">Stock</span></td>
                                     @elseif($item->status == '3')
                                         <td> <span class="badge badge-danger">Sold</span></td>
-                                    @elseif($item->status == '10')
+                                    @elseif($item->status == '1')
                                         <td> <span class="badge badge-primary">Pending</span></td>
                                     @elseif($item->status == '2')
                                         <td> <span class="badge badge-danger">Not Approved</span></td>

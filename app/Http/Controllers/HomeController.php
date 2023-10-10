@@ -85,8 +85,10 @@ class HomeController extends Controller
         $title1 = "Users";
         return view('Admin.Users.editusers', compact('title', 'title1', 'user'));
     }
-    public function deleteedit($id)
+    public function usersdelete($id)
     {
+        User::find($id)->delete();
+        return redirect()->back()->with('success', 'User Deleted successfully.');
     }
     public function addUser()
     {
@@ -150,14 +152,17 @@ class HomeController extends Controller
         $title = "Pending Dealer";
         $title1 = "Dealer";
 
-        $user = User::join('assignprop', 'users.id', '=', 'assignprop.users_id')->select('*','assignprop.id as id')->where('agent_id', Auth::user()->id)->where('role_id', '3')->where('users.status', '1')->get();
+        $user = User::join('assignprop', 'users.id', '=', 'assignprop.users_id')->select('*', 'assignprop.id as id')->where('agent_id', Auth::user()->id)->where('role_id', '3')->where('users.status', '1')->get();
         return view('Admin.pending.dealer', compact('title', 'title1', 'user'));
     }
     public function userspropertyapproved()
     {
         $title = "Pending Property";
         $title1 = "Property";
-        $property = properties::join('assignprop', 'properties.id', '=', 'assignprop.users_id')->select('properties.*','assignprop.*','assignprop.status as status','assignprop.id as id')->where('assignprop.status', '10')->where('agent_id', Auth::user()->id)->get();
+        $property = properties::join('assignprop', 'properties.id', '=', 'assignprop.users_id')
+            ->select('properties.*', 'assignprop.*', 'assignprop.status as status', 'assignprop.id as id')
+            ->where('assignprop.status', '1')
+            ->where('agent_id', Auth::user()->id)->get();
         return view('Admin.pending.property', compact('title', 'title1', 'property'));
     }
 

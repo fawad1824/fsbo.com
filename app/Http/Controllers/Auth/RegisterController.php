@@ -108,7 +108,7 @@ class RegisterController extends Controller
         try {
             return Mail::send('emails.otp', ['user' => $user], function ($message) use ($to, $user) {
                 $message->to($to)
-                    ->subject('FBSO Registraton OTP');
+                    ->subject('FBSO Registraton');
             });
         } catch (\Exception $e) {
             return $e;
