@@ -47,6 +47,7 @@ Route::get('/optconfirm/{email}', [RegisterController::class, 'otpconfirm'])->na
 // Property
 Route::get('/createProperty', [AdminController::class, 'createProperty'])->name('createProperty');
 Route::post('/addProperty', [AdminController::class, 'addProperty'])->name('addProperty');
+Route::post('/updateProperty', [AdminController::class, 'updateProperty'])->name('update.property');
 Route::get('/property/{type}', [AdminController::class, 'Listproperty'])->name('Listproperty');
 Route::delete('/propertydelete/{id}', [AdminController::class, 'ListpropertyDelete'])->name('ListpropertyDelete');
 Route::get('/propertyedit/{id}', [AdminController::class, 'Listpropertyedit'])->name('Listpropertyedit');

@@ -144,7 +144,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="/booking/user_booking"
                                 class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-book"></i>
@@ -152,7 +152,7 @@
                                     Users Bookings
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
                             {{-- <li class="nav-item">
                                 <a href="/booking/users_appointment"
                                     class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">

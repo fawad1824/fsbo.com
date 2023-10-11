@@ -82,6 +82,54 @@ class AdminController extends Controller
         $this->sendEmail($user, "Hi " . $user->name . " ! "  . 'Your Property Has Been Added wait for admin Approval Thanks!', " " . "FBSO Team");
         return redirect()->back()->with('success', 'property Added successfully.');
     }
+    public function updateProperty(Request $request)
+    {
+        // return $request->all();
+        $property =  properties::where('id',$request->id)->first();
+        $property->type = $request->TypeProperty;
+        $property->ptype = $request->types;
+        $property->ptype2 = $request->types2;
+        $property->areaname = $request->areaname;
+        $property->size = $request->area;
+        $property->sizeM = $request->size;
+        $property->price = $request->price;
+        $property->bedrooms = $request->bedroom;
+        $property->bathrooms = $request->bathroom;
+        $property->name = $request->namep;
+        $property->condition = $request->condition;
+        $property->desc = $request->desc;
+        $property->user_id = Auth::user()->id;
+        $property->status = '10';
+        $property->sectors = $request->sectors;
+        if ($request->feature) {
+            $property->feature = '1';
+        }
+
+        if ($request->hasFile('fileinput1')) {
+            $image = $request->file('fileinput1');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $property->image = $imageName;
+        }
+        $property->save();
+
+        if ($request->hasFile('fileinput')) {
+            $images = $request->file('fileinput');
+
+            foreach ($images as $image) {
+                if ($image->isValid()) {
+                    $imageName = time() . '.' . $image->getClientOriginalName();
+                    $image->move(public_path('images'), $imageName);
+                    $gallery = new Galleries();
+                    $gallery->image = $imageName;
+                    $gallery->prop_id = $property->id;
+                    $gallery->save();
+                }
+            }
+        }
+        $user = User::where('id', Auth::user()->id)->first();
+        return redirect()->back()->with('success', 'property Updated successfully.');
+    }
 
     public function Listproperty($type)
     {
@@ -108,6 +156,14 @@ class AdminController extends Controller
     }
     public function Listpropertyedit($id)
     {
+        $property = properties::find($id);
+        $gallery =   Galleries::where('prop_id', $id)->get();
+        $title = "Edit Property";
+        $title1 = "Home";
+
+        $propertyKinds = propertieskind::all();
+        $propertysector = Sectors::all();
+        return view('Admin.Property.edit', compact('title', 'title1', 'propertyKinds', 'propertysector', 'property', 'gallery'));
     }
     public function myBooking($type)
     {
@@ -184,7 +240,7 @@ class AdminController extends Controller
         }
         if ($request->userID) {
             $prop1 = DB::table('properties')->where('id', $request->userID)->update([
-                'status'=>$request->status,
+                'status' => $request->status,
             ]);
             // $prop1->status = $request->status;
             // $prop1->save();
