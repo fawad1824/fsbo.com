@@ -89,7 +89,7 @@
                         <a href="{{ url('dealer') }}"
                             class="nav-item nav-link {{ Route::is('dealer') ? 'active' : '' }}">Dealers</a>
                         <a href="{{ url('properties') }}" class="nav-item nav-link {{ Route::is('properties') ? 'active' : '' }}">Properties</a>
-                        <a href="{{ url('contact') }}" class="nav-item nav-link  {{ Route::is('contact') ? 'active' : '' }}">Contact</a>
+                        {{-- <a href="{{ url('contact') }}" class="nav-item nav-link  {{ Route::is('contact') ? 'active' : '' }}">Contact</a> --}}
                         @guest
                             @if (Route::has('login'))
                                 <a href="{{ url('/login') }}" class="nav-item nav-link">Login</a>
@@ -120,29 +120,31 @@
 
 
         <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn ">
+        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn " data-wow-delay="0.1s ">
             <div class="container py-5 ">
                 <div class="row g-5 ">
                     <div class="col-lg-4 col-md-6 ">
                         <h5 class="text-white mb-4 ">Get In Touch</h5>
                         <p class="mb-2 "><i class="fa fa-map-marker-alt me-3 "></i>123 Street, Sialkot, Pakistan</p>
-                        <p class="mb-2 "><i class="fa fa-phone-alt me-3 "></i>+92 345678901</p>
-                        <p class="mb-2 "><i class="fa fa-envelope me-3 "></i>info@example.com</p>
+                        <p class="mb-2 "><i class="fa fa-phone-alt me-3 "></i><a style="color: #878a8c;"
+                                href="tel:+92 345678901">+92 345678901</a></p>
+                        <p class="mb-2 "><i class="fa fa-envelope me-3 "></i><a style="color: #878a8c;"
+                                href="malto:fsbo1122@gmail.com">fsbo1122@gmail.com</a></p>
                         <div class="d-flex pt-2 ">
-                            <a class="btn btn-outline-light btn-social " href=" "><i
+                            <a class="btn btn-outline-light btn-social " href="https://twitter.com/fsbo1122"><i
                                     class="fab fa-twitter "></i></a>
-                            <a class="btn btn-outline-light btn-social " href=" "><i
+                            <a class="btn btn-outline-light btn-social "
+                                href="https://www.facebook.com/profile.php?id=100094426160135&mibextid=ZbWKwL"><i
                                     class="fab fa-facebook-f "></i></a>
-                            <a class="btn btn-outline-light btn-social " href=" "><i
-                                    class="fab fa-youtube "></i></a>
-                            <a class="btn btn-outline-light btn-social " href=" "><i
+                            <a class="btn btn-outline-light btn-social "
+                                href="https://instagram.com/fsbo1122?igshid=MzNlNGNkZWQ4Mg=="><i
                                     class="fab fa-linkedin-in "></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 ">
                         <h5 class="text-white mb-4 ">Quick Links</h5>
                         <a class="btn btn-link text-white-50 " href="{{ url('about') }} ">About Us</a>
-                        <a class="btn btn-link text-white-50 " href="{{ url('contact') }}  ">Contact Us</a>
+                        {{-- <a class="btn btn-link text-white-50 " href="{{ url('contact') }}  ">Contact Us</a> --}}
                         <a class="btn btn-link text-white-50 " href="{{ url('about') }}  ">Our Services</a>
                         <a class="btn btn-link text-white-50 " href="{{ url('policy') }} ">Privacy Policy</a>
                         <a class="btn btn-link text-white-50 " href="{{ url('terms') }}
@@ -164,7 +166,7 @@
                 <div class="copyright ">
                     <div class="row ">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0 ">
-                            &copy; <a class="border-bottom "href="# ">FSBO</a>, All Right Reserved 2023.
+                            &copy; <a class="border-bottom " href="# ">FSBO</a>, All Right Reserved 2023.
 
                         </div>
 
@@ -173,6 +175,7 @@
             </div>
         </div>
         <!-- Footer End -->
+
 
         <!-- Back to Top -->
         <a href="# " class="btn btn-lg btn-primary btn-lg-square back-to-top "><i

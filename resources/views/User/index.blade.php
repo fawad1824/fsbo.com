@@ -83,14 +83,18 @@
                 <div class="col-md-10 ">
                     <div class="row g-2 ">
                         <div class="col-md-4 ">
-                            <input type="text " class="form-control border-0 py-3 " placeholder="Search Keyword ">
+                            <select class="form-select border-0 py-3 ">
+                                <option selected>Select Type</option>
+                                <option value="1 ">Rent</option>
+                                <option value="2 ">Sell</option>
+                            </select>
                         </div>
                         <div class="col-md-4 ">
                             <select class="form-select border-0 py-3 ">
-                                <option selected>Property Type</option>
-                                <option value="1 ">Property Type 1</option>
-                                <option value="2 ">Property Type 2</option>
-                                <option value="3 ">Property Type 3</option>
+                                <option selected>Type</option>
+                                @foreach ($propetyType as $item)
+                                    <option >{{ $item->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-4 ">
@@ -104,7 +108,7 @@
                     </div>
                 </div>
                 <div class="col-md-2 ">
-                    <a href="property-list.html " class="btn btn-dark border-0 w-100 py-3 ">Search</a>
+                    <a href="/properties " class="btn btn-dark border-0 w-100 py-3 ">Search</a>
                 </div>
             </div>
         </div>
@@ -121,7 +125,7 @@
             <div class="row g-4">
                 @foreach ($propetyType as $item)
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                        <a class="cat-item d-block bg-light text-center rounded p-3" href="/properties">
                             <div class="rounded p-4">
                                 <div class="icon mb-3">
                                     <img class="img-fluid" src="{{ asset($item->image) }}" alt="Icon">
@@ -153,7 +157,7 @@
                     <p><i class="fa fa-check text-primary me-3 "></i>User-friendly and convenient.</p>
                     <p><i class="fa fa-check text-primary me-3 "></i>Easy to manage property portfolio.</p>
                     <p><i class="fa fa-check text-primary me-3 "></i>Easy to manage inventory.</p>
-                    <a class="btn btn-primary py-3 px-5 mt-3 " href=" ">Read More</a>
+                    <a class="btn btn-primary py-3 px-5 mt-3 " href="/properties">Read More</a>
                 </div>
             </div>
         </div>
@@ -214,7 +218,8 @@
                                                         alt=" "></a>
                                                 <div
                                                     class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                                    For {{ $item->type }} {{ $item->feature == 1 ? ' | Featured' : '' }}</div>
+                                                    For {{ $item->type }} {{ $item->feature == 1 ? ' | Featured' : '' }}
+                                                </div>
                                                 <div
                                                     class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
                                                     {{ $Ptype->name . ' ' . $Ptype2->name }}</div>
@@ -270,7 +275,8 @@
                                                         alt=" "></a>
                                                 <div
                                                     class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                                    For {{ $item->type }} {{ $item->feature == 1 ? ' | Featured' : '' }}</div>
+                                                    For {{ $item->type }} {{ $item->feature == 1 ? ' | Featured' : '' }}
+                                                </div>
                                                 <div
                                                     class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
                                                     {{ $Ptype->name . ' ' . $Ptype2->name }}</div>
@@ -326,7 +332,8 @@
                                                         alt=" "></a>
                                                 <div
                                                     class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3 ">
-                                                    For {{ $item->type }} {{ $item->feature == 1 ? ' | Featured' : '' }}</div>
+                                                    For {{ $item->type }} {{ $item->feature == 1 ? ' | Featured' : '' }}
+                                                </div>
                                                 <div
                                                     class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3 ">
                                                     {{ $Ptype->name . ' ' . $Ptype2->name }}</div>
@@ -380,10 +387,10 @@
                                 <p>Real Estate Agents usually specialize in either commercial or residential real estate.
                                 </p>
                             </div>
-                            <a href="#" class="btn btn-primary py-3 px-4 me-2 "><i
-                                    class="fa fa-phone-alt me-2 "></i>Make A Call</a>
-                            <a href="#" class="btn btn-dark py-3 px-4 "><i class="fa fa-calendar-alt me-2 "></i>Get
-                                Booking</a>
+                            <a href="/Chat" class="btn btn-primary py-3 px-4 me-2 "><i
+                                    class="fa fa-phone-alt me-2 "></i>Make a Chat</a>
+                            {{-- <a href="#" class="btn btn-dark py-3 px-4 "><i class="fa fa-calendar-alt me-2 "></i>Get
+                                Booking</a> --}}
                         </div>
                     </div>
                 </div>
@@ -408,8 +415,7 @@
                     <div class="col-lg-3 col-md-6 wow fadeInUp ">
                         <div class="team-item rounded overflow-hidden ">
                             <div class="position-relative ">
-                                <img class="img-fluid " src="{{ asset('storage/users-avatar/' . $item->avatar) }} "
-                                    alt=" ">
+                                <img class="img-fluid " src="{{ asset('images/' . $item->avatar) }} " alt=" ">
                                 <div
                                     class="position-absolute start-50 top-100 translate-middle d-flex align-items-center ">
                                     <a class="btn btn-square mx-1 " href=" "><i class="fab fa-facebook-f "></i></a>

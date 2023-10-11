@@ -211,23 +211,23 @@
                                         ->where('appointment_id', '1')
                                         ->first();
                                 @endphp
-                                @if ($checkBook)
+                                {{-- @if ($checkBook)
                                     <p style="margin: 17px 0px;">Already Booked</p>
                                 @else
                                     <button type="button"class="btn btn-primary py-3 px-4 me-2 pl-2" data-toggle="modal"
                                         data-target="#exampleModalCenter">
                                         <i class="fa fa-phone-alt me-2 "></i> Get Booking
                                     </button>
-                                @endif
+                                @endif --}}
 
-                                @if ($checkApp)
+                                {{-- @if ($checkApp)
                                     <p style="margin: 17px 19px;">Already Appointment</p>
                                 @else
                                     <button type="button"class="btn btn-dark py-3 px-4 me-2 pl-2" data-toggle="modal"
                                         data-target="#exampleModalCenter2">
                                         <i class="fa fa-calendar-alt me-2 "></i>Get Appoinment
                                     </button>
-                                @endif
+                                @endif --}}
                                 <a href="{{ url('Chat').'/'.$property->user_id }}" class="btn btn-dark py-3 px-4 me-2 pl-2">
                                     <i class="fa fa-commenting "></i>
                                 </a>

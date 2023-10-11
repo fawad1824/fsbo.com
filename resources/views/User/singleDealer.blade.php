@@ -62,7 +62,7 @@
                 <div class="col-lg-4 ">
                     <div class="team-item rounded overflow-hidden ">
                         <div class="position-relative ">
-                            <img class="img-fluid " src="{{ asset('storage/users-avatar/' . $userTeam->avatar) }} "
+                            <img class="img-fluid " src="{{ asset('images/' . $userTeam->avatar) }} "
                                 alt=" ">
                             <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center ">
                                 <a class="btn btn-square mx-1 " href=" "><i class="fab fa-facebook-f "></i></a>

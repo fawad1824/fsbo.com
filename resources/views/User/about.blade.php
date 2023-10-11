@@ -57,7 +57,7 @@
                     <div class="col-lg-3 col-md-6 wow fadeInUp " data-wow-delay="0.1s ">
                         <div class="team-item rounded overflow-hidden ">
                             <div class="position-relative ">
-                                <img class="img-fluid " src="{{ asset('storage/users-avatar/' . $item->avatar) }} "
+                                <img class="img-fluid " src="{{ asset('images/' . $item->avatar) }} "
                                     alt=" ">
                                 <div
                                     class="position-absolute start-50 top-100 translate-middle d-flex align-items-center ">

@@ -107,7 +107,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 col-12">
+                {{-- <div class="col-md-4 col-sm-6 col-12">
                     <div class="info-box shadow-none">
                         <div class="info-box-content">
                             <span class="info-box-text">Number of Bookings</span>
@@ -122,9 +122,9 @@
                             <span class="info-box-number">{{ $appCountAD }}</span>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             @elseif (Auth::user()->role_id == '3' || Auth::user()->role_id == '3')
-                <div class="col-md-4 col-sm-6 col-12">
+                {{-- <div class="col-md-4 col-sm-6 col-12">
                     <div class="info-box shadow-none">
                         <div class="info-box-content">
                             <span class="info-box-text">My Booking</span>
@@ -155,7 +155,7 @@
                             <span class="info-box-number">{{ $appCountADUSER }}</span>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-md-4 col-sm-6 col-12">
                     <div class="info-box shadow-none">
                         <div class="info-box-content">

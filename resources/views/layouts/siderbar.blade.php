@@ -40,7 +40,7 @@
 
                         {{-- Property Dealer --}}
                         @if (Auth::user()->role_id == '3')
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="/booking/my_booking"
                                     class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-book"></i>
@@ -76,7 +76,7 @@
                                         Users Appointments
                                     </p>
                                 </a>
-                            </li>
+                            </li> --}}
 
                             <li
                                 class="nav-item {{ ((Route::is('propertyRent') ? 'menu-open' : '' || Route::is('createProperty')) ? 'menu-open' : '' || Route::is('Listproperty')) ? 'menu-open' : '' }}">
@@ -153,7 +153,7 @@
                                 </p>
                             </a>
                         </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="/booking/users_appointment"
                                     class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-book"></i>
@@ -161,7 +161,7 @@
                                         Users Appointments
                                     </p>
                                 </a>
-                            </li>
+                            </li> --}}
 
                             <li class="nav-item">
                                 <a href="{{ url('property/rent') }}"
@@ -178,7 +178,7 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ url('userscontact') }}"
                                     class="nav-link {{ Route::is('userscontact') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-user"></i>
@@ -186,7 +186,7 @@
                                         Contacts
                                     </p>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item {{ Route::is('users') ? 'menu-open' : '' }}">
                                 <a href="#" class="nav-link {{ Route::is('users') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-users"></i>
@@ -226,7 +226,7 @@
 
                         {{-- Customers --}}
                         @if (Auth::user()->role_id == '4')
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="/booking/my_booking"
                                     class="nav-link {{ Route::is('myBooking') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-book"></i>
@@ -244,7 +244,7 @@
                                         My Appointments
                                     </p>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <a href="/propertyLike"
                                     class="nav-link {{ Route::is('propertyLike') ? 'active' : '' }}">
