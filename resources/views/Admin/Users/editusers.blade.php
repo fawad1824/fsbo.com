@@ -10,7 +10,7 @@
                     </button>
                 </div>
             @endif
-            <form action="{{ url('addCreateUser') }}" method="post">
+            <form action="{{ url('addCreateUser') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="">Name</label>
@@ -51,8 +51,7 @@
                 <div class="form-group">
                     <label for="">Password</label>
                     <input type="password" name="password" id="password"
-                        class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}"
-                        autocomplete="password" autofocus>
+                        class="form-control @error('password') is-invalid @enderror" autocomplete="password" autofocus>
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -96,6 +95,8 @@
                             </span>
                         @enderror
                     </div>
+
+
                     <div class="form-group">
                         <label for="">Status</label>
                         <select name="status" id="status" required value="{{ old('status') }}"
@@ -119,9 +120,46 @@
                 @endif
 
                 <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
+                    @error('image')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="preview_image">Preview Image</label>
+                    <img id="preview_image" src="" alt="Preview Image" class="img-thumbnail" style="display: none;" width="200">
+                </div>
+
+
+                <div class="form-group">
                     <button type="submit" class="btn btn-primary">Updatd</button>
                 </div>
             </form>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#image').change(function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#preview_image').attr('src', e.target.result);
+                    $('#preview_image').css('display', 'block');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                $('#preview_image').attr('src', '');
+                $('#preview_image').css('display', 'none');
+            }
+        });
+    });
+</script>
+
 @endsection

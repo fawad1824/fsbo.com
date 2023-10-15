@@ -276,7 +276,7 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ url('userscontact') }}"
                                     class="nav-link {{ Route::is('userscontact') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-user"></i>
@@ -284,7 +284,7 @@
                                         Contacts
                                     </p>
                                 </a>
-                            </li>
+                            </li> --}}
                         @endif
 
                         <li class="nav-item">

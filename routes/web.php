@@ -5,6 +5,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Website\WebsiteController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -83,3 +85,8 @@ Route::post('/usersAppointment', [WebsiteController::class, 'usersAppointment'])
 Route::post('/usersBooking', [WebsiteController::class, 'usersBooking'])->name('usersBooking');
 Route::post('/usersLikeP/{id}', [WebsiteController::class, 'usersLikeP'])->name('usersLikeP');
 
+
+
+Route::get('/forgot-password', function () {
+    return view('auth.passwords.email');
+})->middleware('guest');

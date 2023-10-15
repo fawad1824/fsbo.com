@@ -1,4 +1,11 @@
 @extends('layouts.website')
+<style>
+    .img-fluid {
+    max-width: 100%;
+    height: inherit;
+    width: 400px;
+}
+</style>
 
 @section('content')
     <!-- Header Start -->
@@ -38,7 +45,7 @@
                     <p><i class="fa fa-check text-primary me-3 "></i>User-friendly and convenient.</p>
                     <p><i class="fa fa-check text-primary me-3 "></i>Easy to manage property portfolio.</p>
                     <p><i class="fa fa-check text-primary me-3 "></i>Easy to manage inventory.</p>
-                    <a class="btn btn-primary py-3 px-5 mt-3 " href=" ">Read More</a>
+                    {{-- <a class="btn btn-primary py-3 px-5 mt-3 " href=" ">Read More</a> --}}
                 </div>
             </div>
         </div>
@@ -59,12 +66,12 @@
                             <div class="position-relative ">
                                 <img class="img-fluid " src="{{ asset('images/' . $item->avatar) }} "
                                     alt=" ">
-                                <div
+                                {{-- <div
                                     class="position-absolute start-50 top-100 translate-middle d-flex align-items-center ">
                                     <a class="btn btn-square mx-1 " href=" "><i class="fab fa-facebook-f "></i></a>
                                     <a class="btn btn-square mx-1 " href=" "><i class="fab fa-twitter "></i></a>
                                     <a class="btn btn-square mx-1 " href=" "><i class="fab fa-instagram "></i></a>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="text-center p-4 mt-3 ">
                                 <h5 style="font-size: 17px;" class="fw-bold mb-0 ">{{ $item->name }}</h5>

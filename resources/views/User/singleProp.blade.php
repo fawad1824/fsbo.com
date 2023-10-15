@@ -198,7 +198,7 @@
 
                         @if ($property->status != '3')
                             @if (Auth::check())
-                                @php
+                                {{-- @php
                                     $checkBook = DB::table('booking')
                                         ->where('user_id', Auth::user()->id)
                                         ->where('property_id', $property->id)
@@ -210,7 +210,7 @@
                                         ->where('property_id', $property->id)
                                         ->where('appointment_id', '1')
                                         ->first();
-                                @endphp
+                                @endphp --}}
                                 {{-- @if ($checkBook)
                                     <p style="margin: 17px 0px;">Already Booked</p>
                                 @else

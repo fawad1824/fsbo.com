@@ -110,6 +110,15 @@ class HomeController extends Controller
             $user->status = $data->status;
             $user->phone = $data['phone'];
             $user->address = $data['address'];
+
+
+            if ($data->hasFile('image')) {
+                $image = $data->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $imageName);
+                $user->avatar = $imageName;
+            }
+
             $user->save();
             if ($data->status == "1") {
                 $this->sendEmail($user, "Hi " . $user->name . " ! "  . "Deactivated Your Account", "FBSO Updated Your Account");
@@ -118,6 +127,7 @@ class HomeController extends Controller
             }
             return redirect()->back()->with('success', 'User Updated successfully.');
         }
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],

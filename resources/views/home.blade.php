@@ -17,32 +17,32 @@
             $customerCount = DB::table('users')
                 ->where('role_id', '4')
                 ->count();
-            $bookingCountAD = DB::table('booking')
-                ->where('booking_id', '1')
-                ->count();
-            $appCountAD = DB::table('booking')
-                ->where('appointment_id', '1')
-                ->count();
+            // $bookingCountAD = DB::table('booking')
+            //     ->where('booking_id', '1')
+            //     ->count();
+            // $appCountAD = DB::table('booking')
+            //     ->where('appointment_id', '1')
+            //     ->count();
 
             // Dealer
 
-            $bookingCountADMY = DB::table('booking')
-                ->where('booking_id', '1')
-                ->where('user_id', Auth::user()->id)
-                ->count();
-            $appCountADMY = DB::table('booking')
-                ->where('appointment_id', '1')
-                ->where('user_id', Auth::user()->id)
-                ->count();
+            // $bookingCountADMY = DB::table('booking')
+            //     ->where('booking_id', '1')
+            //     ->where('user_id', Auth::user()->id)
+            //     ->count();
+            // $appCountADMY = DB::table('booking')
+            //     ->where('appointment_id', '1')
+            //     ->where('user_id', Auth::user()->id)
+            //     ->count();
 
-            $bookingCountADUSER = DB::table('booking')
-                ->where('booking_id', '1')
-                ->where('contactuser_id', Auth::user()->id)
-                ->count();
-            $appCountADUSER = DB::table('booking')
-                ->where('appointment_id', '1')
-                ->where('contactuser_id', Auth::user()->id)
-                ->count();
+            // $bookingCountADUSER = DB::table('booking')
+            //     ->where('booking_id', '1')
+            //     ->where('contactuser_id', Auth::user()->id)
+            //     ->count();
+            // $appCountADUSER = DB::table('booking')
+            //     ->where('appointment_id', '1')
+            //     ->where('contactuser_id', Auth::user()->id)
+            //     ->count();
             $likepropertyUSER = DB::table('likeproperty')
                 ->where('user_id', Auth::user()->id)
                 ->count();
